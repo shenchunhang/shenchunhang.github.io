@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title>喵帕斯~~ • Posts by &#34;websocket&#34; tag</title>
+    <link href="http://example.com" />
+    <updated>2024-04-22T13:28:34.000Z</updated>
+    <category term="超频" />
+    <category term="硬件" />
+    <category term="diy" />
+    <category term="pc" />
+    <category term="hexo" />
+    <category term="Shoka" />
+    <category term="ShokaX" />
+    <category term="mysql" />
+    <category term="java" />
+    <category term="定位" />
+    <category term="struts2" />
+    <category term="JVM" />
+    <category term="源码" />
+    <category term="websocket" />
+    <category term="工具" />
+    <category term="github" />
+    <category term="日常" />
+    <category term="动漫" />
+    <entry>
+        <id>http://example.com/2024/04/22/websocket%E4%B8%89%E6%96%B9%E5%BC%80%E6%BA%90%E4%BB%B6%E5%8D%87%E7%BA%A7/</id>
+        <title>websocket三方开源件升级</title>
+        <link rel="alternate" href="http://example.com/2024/04/22/websocket%E4%B8%89%E6%96%B9%E5%BC%80%E6%BA%90%E4%BB%B6%E5%8D%87%E7%BA%A7/"/>
+        <content type="html">&lt;h2 id=&#34;介绍&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#介绍&#34;&gt;#&lt;/a&gt; 介绍&lt;/h2&gt;
+&lt;p&gt;还是之前那个 websocket, websocket 这部分是直接借用其他同事的代码，属于上拿来直接用了，等都转测都快结束了，自己过了一遍代码，发现 idea 提示这个版本的 websocket, 有 CVE 漏洞，心凉半截，当时感觉应该不是什么大问题，改个版本就可以，然后事情果然没这么简单&lt;/p&gt;
+&lt;h2 id=&#34;orgjava-websocket&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#orgjava-websocket&#34;&gt;#&lt;/a&gt; org.java-websocket&lt;/h2&gt;
+&lt;p&gt;同事给的依赖版本是 1.3.0, 我也在这个基础上，把功能都开发完了&lt;br&gt;
+ {&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;code&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.6944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;co&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;e&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;}&lt;br&gt;
+&lt;dependency&gt;&lt;br&gt;
+&lt;groupId&gt;org.java-websocket&lt;/groupId&gt;&lt;br&gt;
+&lt;artifactId&gt;Java-WebSocket&lt;/artifactId&gt;&lt;br&gt;
+&lt;version&gt;1.3.0&lt;/version&gt;&lt;br&gt;
+&lt;/dependency&gt;&lt;br&gt;
+{&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;endcode&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.6944em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;co&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;e&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;}&lt;br&gt;
+ 当我直接升级到最新版本 1.5.6 的时候，有一个函数报错了&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+SSLContext sc &amp;#x3D; SSLContext.getInstance(&amp;quot;SSL&amp;quot;);  
+sc.init(null, trustAllCerts, new java.security.SecureRandom());  
+sslSocketFactory &amp;#x3D; sc.getSocketFactory();  &lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;直入主题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#直入主题&#34;&gt;#&lt;/a&gt; 直入主题&lt;/h2&gt;
+&lt;p&gt;引用的三方开源件: &lt;a href=&#34;https://github.com/TooTallNate/Java-WebSocket&#34;&gt;https://github.com/TooTallNate/Java-WebSocket&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;之前没写完，今天来写，不想写了，直接讲两点&lt;br&gt;
+升级开源三方件 1.3.0 -&amp;gt; 1.5.6, 遇到两个问题&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;api 发生变化&lt;/li&gt;
+&lt;li&gt;信任所有证书报错&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;api发生变化&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#api发生变化&#34;&gt;#&lt;/a&gt; api 发生变化&lt;/h3&gt;
+&lt;p&gt;原代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  
+  &amp;#x2F;&amp;#x2F; 升级前
+  MyWebsocketClient client &amp;#x3D; new MyWebsocketClient(new URI(uri), new Draft_76(), new HashMap&amp;lt;&amp;gt;(), 2000);
+SSLContext sc &amp;#x3D; SSLContext.getInstance( &amp;quot;TLS&amp;quot; );
+sc.init( kmf.getKeyManagers(), tmf.getTrustManagers(), null );
+client.setWebSocketFactory(new DefaultSSLWebSocketServerFactory(sc));
+  &amp;#x2F;&amp;#x2F; 升级后
+  MyWebsocketClient client &amp;#x3D; new MyWebsocketClient(new URI(uri), new Draft_6455(), new HashMap&amp;lt;&amp;gt;(), 2000);
+  SSLContext sc &amp;#x3D; SSLContext.getInstance(&amp;quot;TLS&amp;quot;);  
+  sc.init(null, trustAllCerts, new java.security.SecureRandom());  
+  client.setSocketFactory(sc.getSocketFactory());&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;setWebSocketFactory () 变成了 setSocketFactory ()&lt;br&gt;
+ 这是官方的样例写法&lt;br&gt;
+&lt;a href=&#34;https://github.com/TooTallNate/Java-WebSocket/blob/master/src/main/example/SSLClientExample.java&#34;&gt; https://github.com/TooTallNate/Java-WebSocket/blob/master/src/main/example/SSLClientExample.java&lt;/a&gt;&lt;br&gt;
+ 看了一下 git 记录，发现中间还有一次变动&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;chatclient.setWebSocketFactory( new SSLWebSocketClientFactory( sslContext ) );&lt;/li&gt;
+&lt;li&gt;chatclient.setSocket( factory.createSocket() );&lt;/li&gt;
+&lt;li&gt;chatclient.setSocketFactory(factory);&lt;br&gt;
+ 初版的时候，还是自己写了 factory, 第二版开始，变成使用了 jdk 给定 factory 了，就是这里导致了我还得继续改信任所有证书的代码，请看下一节&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;信任所有证书报错&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#信任所有证书报错&#34;&gt;#&lt;/a&gt; 信任所有证书报错&lt;/h3&gt;
+&lt;p&gt;本来以为也就改个 api 罢了，结果出包验证发现，日志中出现校验证书的报错，继续定位呗&lt;br&gt;
+这次也是代码走读，翻看源码&lt;br&gt;
+先给大家看下原本的代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+MyWebsocketClient client &amp;#x3D; new MyWebsocketClient(new URI(uri), new Draft_6455(), new HashMap&amp;lt;&amp;gt;(), 2000);
+    TrustManager[] trustAllCerts &amp;#x3D; new TrustManager[]{
+            new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                }
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                }
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[]{};
+                }
+            }
+    };
+    try {
+        SSLContext sc &amp;#x3D; SSLContext.getInstance(&amp;quot;SSL&amp;quot;);
+        sc.init(null, trustAllCerts, new java.security.SecureRandom());
+        client.setSocketFactory(sc.getSocketFactory());
+    } catch (NoSuchAlgorithmException | KeyManagementException e) {
+        e.printStackTrace();
+    }
+    boolean connected &amp;#x3D; false;
+    try {
+        connected &amp;#x3D; client.connectBlocking();
+    } catch (InterruptedException e) {
+        log.error(&amp;quot;connectBlocking fail&amp;quot;, e);
+    }
+    if (!connected) {
+        client.close();
+        return Optional.empty();
+    }
+    return Optional.of(client);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;首先就是 sc.init (null, trustAllCerts, new java.security.SecureRandom ());&lt;br&gt;
+ 然后往下跳进两步 发现有 trustManager = chooseTrustManager™;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+private X509TrustManager chooseTrustManager(TrustManager[] tm) {
+    &amp;#x2F;&amp;#x2F; We only use the first instance of X509TrustManager passed to us.
+    for (int i &amp;#x3D; 0; tm !&amp;#x3D; null &amp;amp;&amp;amp; i &amp;lt; tm.length; i++) {
+        if (tm[i] instanceof X509TrustManager) {
+            if (tm[i] instanceof X509ExtendedTrustManager) {
+                return (X509TrustManager)tm[i];
+            } else {
+                return new AbstractTrustManagerWrapper(
+                                    (X509TrustManager)tm[i]);
+            }
+        }
+    }
+
+    &amp;#x2F;&amp;#x2F; nothing found, return a dummy X509TrustManager.
+    return DummyX509TrustManager.INSTANCE;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;分析这里，发现最终会返回 new AbstractTrustManagerWrapper () 这个默认实现里面，是含有校验的逻辑的，并没有使用我们自己代码 new 出来的 X509TrustManager&lt;br&gt;
+ 改起来也比较简单，我们实现一个 X509ExtendedTrustManager 这个就可以了，这样他就会使用我们自己的 X509ExtendedTrustManager&lt;/p&gt;
+&lt;p&gt;最后贴一下前后对比&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+public Optional&amp;lt;MyWebsocketClient&amp;gt; generateWebsocketClient(String uri) throws URISyntaxException {
+    MyWebsocketClient client &amp;#x3D; new MyWebsocketClient(new URI(uri), new Draft_76(), new HashMap&amp;lt;&amp;gt;(), 2000);
+    TrustManager[] trustAllCerts &amp;#x3D; new TrustManager[]{
+            new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                }
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                }
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[]{};
+                }
+            }
+    };
+    try {
+        SSLContext sc &amp;#x3D; SSLContext.getInstance(&amp;quot;SSL&amp;quot;);
+        sc.init(null, trustAllCerts, new java.security.SecureRandom());
+        client.setWebSocketFactory(new DefaultSSLWebSocketClientFactory(sc);
+    } catch (NoSuchAlgorithmException | KeyManagementException e) {
+        log.error(e.getMessage(), e);
+    }
+    boolean connected &amp;#x3D; false;
+    try {
+        connected &amp;#x3D; client.connectBlocking();
+    } catch (InterruptedException e) {
+        log.error(&amp;quot;connectBlocking fail&amp;quot;, e);
+    }
+    if (!connected) {
+        client.close();
+        return Optional.empty();
+    }
+    return Optional.of(client);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-[java]&#34;&gt;public Optional&amp;lt;MyWebsocketClient&amp;gt; generateWebsocketClient(String uri) throws URISyntaxException &amp;#123;
+    MyWebsocketClient client = new MyWebsocketClient(new URI(uri), new Draft_6455(), new HashMap&amp;lt;&amp;gt;(), 2000);
+    TrustManager[] trustAllCerts = new TrustManager[]&amp;#123;
+            new X509ExtendedTrustManager() &amp;#123;
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException &amp;#123; &amp;#125;
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException &amp;#123; &amp;#125;
+                @Override
+                public X509Certificate[] getAcceptedIssuers() &amp;#123;
+                    return new X509Certificate[0];
+                &amp;#125;
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType, Socket socket) throws CertificateException &amp;#123; &amp;#125;
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType, Socket socket) throws CertificateException &amp;#123; &amp;#125;
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType, SSLEngine engine) throws CertificateException &amp;#123; &amp;#125;
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType, SSLEngine engine) throws CertificateException &amp;#123; &amp;#125;
+            &amp;#125;
+    &amp;#125;;
+    try &amp;#123;
+        SSLContext sc = SSLContext.getInstance(&amp;quot;SSL&amp;quot;);
+        sc.init(null, trustAllCerts, new java.security.SecureRandom());
+        client.setSocketFactory(sc.getSocketFactory());
+    &amp;#125; catch (NoSuchAlgorithmException | KeyManagementException e) &amp;#123;
+        log.error(e.getMessage(), e);
+    &amp;#125;
+    boolean connected = false;
+    try &amp;#123;
+        connected = client.connectBlocking();
+    &amp;#125; catch (InterruptedException e) &amp;#123;
+        log.error(&amp;quot;connectBlocking fail&amp;quot;, e);
+    &amp;#125;
+    if (!connected) &amp;#123;
+        client.close();
+        return Optional.empty();
+    &amp;#125;
+    return Optional.of(client);
+&amp;#125;
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+        <category term="java" />
+        <category term="源码" />
+        <category term="websocket" />
+        <updated>2024-04-22T13:28:34.000Z</updated>
+    </entry>
+</feed>
