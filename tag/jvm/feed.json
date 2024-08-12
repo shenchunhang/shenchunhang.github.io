@@ -1,0 +1,32 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "null • All posts by \"jvm\" tag",
+    "description": "",
+    "home_page_url": "http://example.com",
+    "items": [
+        {
+            "id": "http://example.com/2024/04/18/websocketClient%E8%AE%B0%E5%BE%97close/",
+            "url": "http://example.com/2024/04/18/websocketClient%E8%AE%B0%E5%BE%97close/",
+            "title": "websocketClient记得close",
+            "date_published": "2024-04-18T14:30:58.000Z",
+            "content_html": "<h2 id=\"背景\"><a class=\"markdownIt-Anchor\" href=\"#背景\">#</a> 背景</h2>\n<p>最近开发了一个特性，关于 websocket 的功能，代码量直接给感到了 5k, 联调都好了，程序就挂在服务器上，然后就没管了，今天发现这个服务器，卡卡的，一看 CPU 占用 500%, 惊了</p>\n<h2 id=\"定位\"><a class=\"markdownIt-Anchor\" href=\"#定位\">#</a> 定位</h2>\n<h3 id=\"先看哪个线程这么吃cpu\"><a class=\"markdownIt-Anchor\" href=\"#先看哪个线程这么吃cpu\">#</a> 先看哪个线程这么吃 CPU</h3>\n<p>top -Hp pid, 这个是查看线程，直接 top 显示的都是进程<br>\n然后取 CPU 占用最高的一个，printf “% x\\n” 线程号，<br>\n 再用 jstack pid &gt; stack.txt<br>\n 在 stack.txt 里面检索一下，发现是 GC 的线程，看了 CPU 占用最高的几个线程，都是 GC 的，然后突然发现端倪，为什么 Thread-XXX 的线程这么多呢，有几千个，看栈帧，看线程名，只能知道是系统龙出来的，但是我自己弄的线程都是有给命名的，感觉很奇怪</p>\n<h3 id=\"先看gc情况-判断是一直在gc\"><a class=\"markdownIt-Anchor\" href=\"#先看gc情况-判断是一直在gc\">#</a> 先看 GC 情况，判断是一直在 GC</h3>\n<p>用 jstat -gcutil pid 1000 10, 发现 FGC 很少，但是 YGC 却来得很多，还一直再增长，这种情况，没有 FGC, 一直 YGC, 那多半，并没有大对象，如果是大对象就直接进老年代，触发 FGC 了</p>\n<h3 id=\"查看heapdump\"><a class=\"markdownIt-Anchor\" href=\"#查看heapdump\">#</a> 查看 heapdump</h3>\n<p>本来准备先 jmap -heap pid 的，结果上传到服务器的 jdk 和 jre 版本不支持，索性直接 jmap -dump:format=b,file=home/xxx/pid.dump, 推荐用 mat（Memory Analyzer Tool）, visualvm, 还是太简陋了，不容易分析，大概看了一遍，没有自己封装的对象在，<br>\n 然后我又检索了一下 websocket 的类名，发现 2000 多个，哦和，问题肯定出现在 new WebscoketClient 的地方，走读了一下代码，发现连接不通的时候没有 close, 导致 GC 一直不把他当成垃圾</p>\n<h3 id=\"源码解析\"><a class=\"markdownIt-Anchor\" href=\"#源码解析\">#</a> 源码解析</h3>\n<p>WebSocketClient 中有两个线程对象，<br>\nprivate Thread writeThread;<br>\nprivate Thread connectReadThread;<br>\n 所以现象中有线程数爆炸，且命名也是系统给的，让人混淆<br>\n再说为什么会有这么多自定义的 WebSocketClient 对象，因为代码终有重连机制<br>\n改正也简单，加上 连接失败，机上 close 就可以了</p>\n<pre><code>\npublic abstract class WebSocketClient extends AbstractWebSocket implements Runnable, WebSocket {\n\n&#x2F;**\n* The URI this channel is supposed to connect to.\n*&#x2F;\nprotected URI uri &#x3D; null;\n\n&#x2F;**\n* The underlying engine\n*&#x2F;\nprivate WebSocketImpl engine &#x3D; null;\n\n&#x2F;**\n* The socket for this WebSocketClient\n*&#x2F;\nprivate Socket socket &#x3D; null;\n\n&#x2F;**\n* The SocketFactory for this WebSocketClient\n*\n* @since 1.4.0\n*&#x2F;\nprivate SocketFactory socketFactory &#x3D; null;\n\n&#x2F;**\n* The used OutputStream\n*&#x2F;\nprivate OutputStream ostream;\n\n&#x2F;**\n* The used proxy, if any\n*&#x2F;\nprivate Proxy proxy &#x3D; Proxy.NO_PROXY;\n\n&#x2F;**\n* The thread to write outgoing message\n*&#x2F;\nprivate Thread writeThread;\n\n&#x2F;**\n* The thread to connect and read message\n*&#x2F;\nprivate Thread connectReadThread;\n\n&#x2F;**\n* The draft to use\n*&#x2F;\nprivate Draft draft;\n\n&#x2F;**\n* The additional headers to use\n*&#x2F;\nprivate Map&lt;String, String&gt; headers;\n\n&#x2F;**\n* The latch for connectBlocking()\n*&#x2F;\nprivate CountDownLatch connectLatch &#x3D; new CountDownLatch(1);\n\n&#x2F;**\n* The latch for closeBlocking()\n*&#x2F;\nprivate CountDownLatch closeLatch &#x3D; new CountDownLatch(1);\n\n&#x2F;**\n* The socket timeout value to be used in milliseconds.\n*&#x2F;\nprivate int connectTimeout &#x3D; 0;\n\n&#x2F;**\n* DNS resolver that translates a URI to an InetAddress\n*\n* @see InetAddress\n* @since 1.4.1\n*&#x2F;\nprivate DnsResolver dnsResolver &#x3D; null;</code></pre>",
+            "tags": [
+                "java",
+                "定位",
+                "JVM"
+            ]
+        },
+        {
+            "id": "http://example.com/2023/05/20/%E5%AE%9A%E4%BD%8D-%E5%BA%94%E7%94%A8%E9%A2%91%E7%B9%81FGC/",
+            "url": "http://example.com/2023/05/20/%E5%AE%9A%E4%BD%8D-%E5%BA%94%E7%94%A8%E9%A2%91%E7%B9%81FGC/",
+            "title": "定位-应用频繁FGC",
+            "date_published": "2023-05-20T13:17:01.000Z",
+            "content_html": "<h2 id=\"背景\"><a class=\"markdownIt-Anchor\" href=\"#背景\">#</a> 背景</h2>\n<p>话务量环境发现接口响应变慢，由于话务量环境啥业务都在做，没法根据业务来直接判断是哪个业务引发的</p>\n<h2 id=\"定位\"><a class=\"markdownIt-Anchor\" href=\"#定位\">#</a> 定位</h2>\n<h3 id=\"1-jstat-gcutil\"><a class=\"markdownIt-Anchor\" href=\"#1-jstat-gcutil\">#</a> 1. jstat -gcutil</h3>\n<p>先用 jstat -gcutil 查看一下 垃圾收集的情况，发现老年代 使用率有点高<br>\n GC 次数和时间也比较多，可以判断肯定一直在 FullGC</p>\n<h3 id=\"2-jmap-heap-pid\"><a class=\"markdownIt-Anchor\" href=\"#2-jmap-heap-pid\">#</a> 2. jmap -heap pid</h3>\n<p>用这个也只能看出用的内存比较多<br>\n然后就自己来了一次 fgc, jmap -histo:live pid<br>\n 执行完，再执行 jmap -heap pid, 没啥变化，<br>\n 这时候推断，jvm 中没有垃圾，可能是那个业务 记录缓存 (Map 这种), 数据太多了，<br>\n 不过 jmap -histo:live 这个也挺偶然的，可能是有线程并没执行完，所以没被当成垃圾，这一步得出的结论还不足以，定位出是哪一块的问题</p>\n<h3 id=\"3取-heapdump来看\"><a class=\"markdownIt-Anchor\" href=\"#3取-heapdump来看\">#</a> 3. 取 heapdump 来看</h3>\n<p>jmap -dump:format=b,file=/home/xxx/sch/my.dump pid<br>\n 取下来用 visualvm 来分析，用 MAT 也可以，只是 visualvm 不用安装，自己电脑一般都有，看了一下，发现 String, SimpleMessage, LinkedBlockingQueue$Node 特别多，代码走读一下，发现原来是线程池的数据<br>\n进一步看，原来是无界队列，消费的速度，赶不上生产的速度了，从而触发 FGC, 再继续下去，应该就 OOM 了</p>\n<h2 id=\"解决方案\"><a class=\"markdownIt-Anchor\" href=\"#解决方案\">#</a> 解决方案</h2>\n<p>问题定位到了，改队列类型不太敢改，前人用这个应该是有道理的，着重看了一下，处理的代码，发现下面有锁，用的 synchronize, 给改成了 Lock 锁，粒度也给降低了，打个补丁上话务量环境，验证没有啥问题，解决，后面还优化了一版，加了批量处理的逻辑，发现队列中有太多，就走批量的逻辑</p>\n",
+            "tags": [
+                "java",
+                "定位",
+                "JVM"
+            ]
+        }
+    ]
+}

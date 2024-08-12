@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title> • Posts by &#34;jvm&#34; tag</title>
+    <link href="http://example.com" />
+    <updated>2024-04-18T14:30:58.000Z</updated>
+    <category term="超频" />
+    <category term="硬件" />
+    <category term="diy" />
+    <category term="pc" />
+    <category term="hexo" />
+    <category term="Shoka" />
+    <category term="ShokaX" />
+    <category term="mysql" />
+    <category term="java" />
+    <category term="定位" />
+    <category term="struts2" />
+    <category term="JVM" />
+    <category term="源码" />
+    <category term="websocket" />
+    <category term="工具" />
+    <category term="github" />
+    <category term="日常" />
+    <category term="动漫" />
+    <entry>
+        <id>http://example.com/2024/04/18/websocketClient%E8%AE%B0%E5%BE%97close/</id>
+        <title>websocketClient记得close</title>
+        <link rel="alternate" href="http://example.com/2024/04/18/websocketClient%E8%AE%B0%E5%BE%97close/"/>
+        <content type="html">&lt;h2 id=&#34;背景&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#背景&#34;&gt;#&lt;/a&gt; 背景&lt;/h2&gt;
+&lt;p&gt;最近开发了一个特性，关于 websocket 的功能，代码量直接给感到了 5k, 联调都好了，程序就挂在服务器上，然后就没管了，今天发现这个服务器，卡卡的，一看 CPU 占用 500%, 惊了&lt;/p&gt;
+&lt;h2 id=&#34;定位&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#定位&#34;&gt;#&lt;/a&gt; 定位&lt;/h2&gt;
+&lt;h3 id=&#34;先看哪个线程这么吃cpu&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#先看哪个线程这么吃cpu&#34;&gt;#&lt;/a&gt; 先看哪个线程这么吃 CPU&lt;/h3&gt;
+&lt;p&gt;top -Hp pid, 这个是查看线程，直接 top 显示的都是进程&lt;br&gt;
+然后取 CPU 占用最高的一个，printf “% x\n” 线程号，&lt;br&gt;
+ 再用 jstack pid &amp;gt; stack.txt&lt;br&gt;
+ 在 stack.txt 里面检索一下，发现是 GC 的线程，看了 CPU 占用最高的几个线程，都是 GC 的，然后突然发现端倪，为什么 Thread-XXX 的线程这么多呢，有几千个，看栈帧，看线程名，只能知道是系统龙出来的，但是我自己弄的线程都是有给命名的，感觉很奇怪&lt;/p&gt;
+&lt;h3 id=&#34;先看gc情况-判断是一直在gc&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#先看gc情况-判断是一直在gc&#34;&gt;#&lt;/a&gt; 先看 GC 情况，判断是一直在 GC&lt;/h3&gt;
+&lt;p&gt;用 jstat -gcutil pid 1000 10, 发现 FGC 很少，但是 YGC 却来得很多，还一直再增长，这种情况，没有 FGC, 一直 YGC, 那多半，并没有大对象，如果是大对象就直接进老年代，触发 FGC 了&lt;/p&gt;
+&lt;h3 id=&#34;查看heapdump&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#查看heapdump&#34;&gt;#&lt;/a&gt; 查看 heapdump&lt;/h3&gt;
+&lt;p&gt;本来准备先 jmap -heap pid 的，结果上传到服务器的 jdk 和 jre 版本不支持，索性直接 jmap -dump:format=b,file=home/xxx/pid.dump, 推荐用 mat（Memory Analyzer Tool）, visualvm, 还是太简陋了，不容易分析，大概看了一遍，没有自己封装的对象在，&lt;br&gt;
+ 然后我又检索了一下 websocket 的类名，发现 2000 多个，哦和，问题肯定出现在 new WebscoketClient 的地方，走读了一下代码，发现连接不通的时候没有 close, 导致 GC 一直不把他当成垃圾&lt;/p&gt;
+&lt;h3 id=&#34;源码解析&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#源码解析&#34;&gt;#&lt;/a&gt; 源码解析&lt;/h3&gt;
+&lt;p&gt;WebSocketClient 中有两个线程对象，&lt;br&gt;
+private Thread writeThread;&lt;br&gt;
+private Thread connectReadThread;&lt;br&gt;
+ 所以现象中有线程数爆炸，且命名也是系统给的，让人混淆&lt;br&gt;
+再说为什么会有这么多自定义的 WebSocketClient 对象，因为代码终有重连机制&lt;br&gt;
+改正也简单，加上 连接失败，机上 close 就可以了&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+public abstract class WebSocketClient extends AbstractWebSocket implements Runnable, WebSocket {
+
+&amp;#x2F;**
+* The URI this channel is supposed to connect to.
+*&amp;#x2F;
+protected URI uri &amp;#x3D; null;
+
+&amp;#x2F;**
+* The underlying engine
+*&amp;#x2F;
+private WebSocketImpl engine &amp;#x3D; null;
+
+&amp;#x2F;**
+* The socket for this WebSocketClient
+*&amp;#x2F;
+private Socket socket &amp;#x3D; null;
+
+&amp;#x2F;**
+* The SocketFactory for this WebSocketClient
+*
+* @since 1.4.0
+*&amp;#x2F;
+private SocketFactory socketFactory &amp;#x3D; null;
+
+&amp;#x2F;**
+* The used OutputStream
+*&amp;#x2F;
+private OutputStream ostream;
+
+&amp;#x2F;**
+* The used proxy, if any
+*&amp;#x2F;
+private Proxy proxy &amp;#x3D; Proxy.NO_PROXY;
+
+&amp;#x2F;**
+* The thread to write outgoing message
+*&amp;#x2F;
+private Thread writeThread;
+
+&amp;#x2F;**
+* The thread to connect and read message
+*&amp;#x2F;
+private Thread connectReadThread;
+
+&amp;#x2F;**
+* The draft to use
+*&amp;#x2F;
+private Draft draft;
+
+&amp;#x2F;**
+* The additional headers to use
+*&amp;#x2F;
+private Map&amp;lt;String, String&amp;gt; headers;
+
+&amp;#x2F;**
+* The latch for connectBlocking()
+*&amp;#x2F;
+private CountDownLatch connectLatch &amp;#x3D; new CountDownLatch(1);
+
+&amp;#x2F;**
+* The latch for closeBlocking()
+*&amp;#x2F;
+private CountDownLatch closeLatch &amp;#x3D; new CountDownLatch(1);
+
+&amp;#x2F;**
+* The socket timeout value to be used in milliseconds.
+*&amp;#x2F;
+private int connectTimeout &amp;#x3D; 0;
+
+&amp;#x2F;**
+* DNS resolver that translates a URI to an InetAddress
+*
+* @see InetAddress
+* @since 1.4.1
+*&amp;#x2F;
+private DnsResolver dnsResolver &amp;#x3D; null;&lt;/code&gt;&lt;/pre&gt;</content>
+        <category term="java" />
+        <category term="定位" />
+        <category term="JVM" />
+        <updated>2024-04-18T14:30:58.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2023/05/20/%E5%AE%9A%E4%BD%8D-%E5%BA%94%E7%94%A8%E9%A2%91%E7%B9%81FGC/</id>
+        <title>定位-应用频繁FGC</title>
+        <link rel="alternate" href="http://example.com/2023/05/20/%E5%AE%9A%E4%BD%8D-%E5%BA%94%E7%94%A8%E9%A2%91%E7%B9%81FGC/"/>
+        <content type="html">&lt;h2 id=&#34;背景&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#背景&#34;&gt;#&lt;/a&gt; 背景&lt;/h2&gt;
+&lt;p&gt;话务量环境发现接口响应变慢，由于话务量环境啥业务都在做，没法根据业务来直接判断是哪个业务引发的&lt;/p&gt;
+&lt;h2 id=&#34;定位&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#定位&#34;&gt;#&lt;/a&gt; 定位&lt;/h2&gt;
+&lt;h3 id=&#34;1-jstat-gcutil&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-jstat-gcutil&#34;&gt;#&lt;/a&gt; 1. jstat -gcutil&lt;/h3&gt;
+&lt;p&gt;先用 jstat -gcutil 查看一下 垃圾收集的情况，发现老年代 使用率有点高&lt;br&gt;
+ GC 次数和时间也比较多，可以判断肯定一直在 FullGC&lt;/p&gt;
+&lt;h3 id=&#34;2-jmap-heap-pid&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-jmap-heap-pid&#34;&gt;#&lt;/a&gt; 2. jmap -heap pid&lt;/h3&gt;
+&lt;p&gt;用这个也只能看出用的内存比较多&lt;br&gt;
+然后就自己来了一次 fgc, jmap -histo:live pid&lt;br&gt;
+ 执行完，再执行 jmap -heap pid, 没啥变化，&lt;br&gt;
+ 这时候推断，jvm 中没有垃圾，可能是那个业务 记录缓存 (Map 这种), 数据太多了，&lt;br&gt;
+ 不过 jmap -histo:live 这个也挺偶然的，可能是有线程并没执行完，所以没被当成垃圾，这一步得出的结论还不足以，定位出是哪一块的问题&lt;/p&gt;
+&lt;h3 id=&#34;3取-heapdump来看&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3取-heapdump来看&#34;&gt;#&lt;/a&gt; 3. 取 heapdump 来看&lt;/h3&gt;
+&lt;p&gt;jmap -dump:format=b,file=/home/xxx/sch/my.dump pid&lt;br&gt;
+ 取下来用 visualvm 来分析，用 MAT 也可以，只是 visualvm 不用安装，自己电脑一般都有，看了一下，发现 String, SimpleMessage, LinkedBlockingQueue$Node 特别多，代码走读一下，发现原来是线程池的数据&lt;br&gt;
+进一步看，原来是无界队列，消费的速度，赶不上生产的速度了，从而触发 FGC, 再继续下去，应该就 OOM 了&lt;/p&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#解决方案&#34;&gt;#&lt;/a&gt; 解决方案&lt;/h2&gt;
+&lt;p&gt;问题定位到了，改队列类型不太敢改，前人用这个应该是有道理的，着重看了一下，处理的代码，发现下面有锁，用的 synchronize, 给改成了 Lock 锁，粒度也给降低了，打个补丁上话务量环境，验证没有啥问题，解决，后面还优化了一版，加了批量处理的逻辑，发现队列中有太多，就走批量的逻辑&lt;/p&gt;
+</content>
+        <category term="java" />
+        <category term="定位" />
+        <category term="JVM" />
+        <updated>2023-05-20T13:17:01.000Z</updated>
+    </entry>
+</feed>

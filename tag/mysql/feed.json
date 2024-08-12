@@ -1,0 +1,29 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "null • All posts by \"mysql\" tag",
+    "description": "",
+    "home_page_url": "http://example.com",
+    "items": [
+        {
+            "id": "http://example.com/2023/01/26/int-tinyint/",
+            "url": "http://example.com/2023/01/26/int-tinyint/",
+            "title": "mysql 无符号数值类型与JAVA数值类型映射问题",
+            "date_published": "2023-01-26T14:33:42.000Z",
+            "content_html": "<p>mysql 无符号数值类型与 JAVA 数值类型映射问题</p>\n<h3 id=\"起因\"><a class=\"markdownIt-Anchor\" href=\"#起因\">#</a> 起因</h3>\n<p>之前忙着弄的项目 1.0, 准备迁移到 2.0 了，需要专门做数据迁移，正好活也分了一部分过来，遇到问题，一个预期返回值类型为 Integer 的值，实际返回了 Long 类型回来，导致结果映射错误，一开始感觉没有道理呀，开发环境没有遇上呀，为啥测试环境能出这个问题，登上测试环境，一看数据库 这个字段 类型 是 int unsigned, 开发环境这个字段是 tinyint unsigned</p>\n<h3 id=\"定位\"><a class=\"markdownIt-Anchor\" href=\"#定位\">#</a> 定位</h3>\n<p>开发环境和测试环境，数据表字段类型不一致，估摸就是升级脚本有问题，我们开发环境一般都是直接新装，测试环境都一直升级，查了一下升级脚本，果然是升级脚本的问题<br>\n建表语句给定的类型是</p>\n<pre><code>tinyint unsigned</code></pre>\n<p>而升级脚本里面给定的类型是</p>\n<pre><code>int unsigned</code></pre>\n<p>在 Java 中，无符号数值并没有直接的原生类型支持. Java 的整数类型（byte, short, int, long）都是有符号的，int unsigned 最大值已经超过 Integer 最大值了，只能用 Long 接收，这次使用的是 JdbcTemplate, 其他的 ORM 框架还没试过，不过其他 ORM 框架都是基于 jdbc 开发，结果也应该是一样的</p>\n<h3 id=\"感想\"><a class=\"markdownIt-Anchor\" href=\"#感想\">#</a> 感想</h3>\n<p>真的少用 unsigned , 和 JAVA 不太搭，容易给别人埋坑</p>\n",
+            "tags": [
+                "mysql",
+                "java"
+            ]
+        },
+        {
+            "id": "http://example.com/2021/04/07/sql-max-method/",
+            "url": "http://example.com/2021/04/07/sql-max-method/",
+            "title": "验证码设计及mysql max函数",
+            "date_published": "2021-04-07T14:28:51.000Z",
+            "content_html": "<h2 id=\"起因\"><a class=\"markdownIt-Anchor\" href=\"#起因\">#</a> 起因</h2>\n<p>事情是这样的，一线有反馈存在验证码的问题，频率为偶现，接到反馈后，我还有点懵，有问题就有问题嘛，还是偶现问题</p>\n<h2 id=\"定位\"><a class=\"markdownIt-Anchor\" href=\"#定位\">#</a> 定位</h2>\n<p>我先自己测试环境试了一下，连着 10 个验证码都没有这个问题，又到生产环境试了 10 个，也没有这个问题，哦嗬，那没法了，问题没法复现，那先看下日志吧，问了一下一线的同事，没给啥信息出来，那就只能代码走读了，然后就一层一层网上扒，一阵看下来，发现这个 查询验证码的 sql 问题很大</p>\n<pre><code>select max(id), verifyCode, used, phoneNumber, creteTime ...\nfrom sms where verifyCode &#x3D;  limit 1;</code></pre>\n<p>max 函数只对结果集的对应参数列有效，和其他列无关系，这个 sql 查询到的结果<br>\n只能查询到 verifyCode 对应最早的一条数据，这样的问题居然到我这里才爆出来，运气挺好<br>\n 6 位的验证码，也就是这种实现逻辑下，只有 899999 个有效值，哈哈哈，应该还是当初代码检视太随意了</p>\n<h2 id=\"解决方案\"><a class=\"markdownIt-Anchor\" href=\"#解决方案\">#</a> 解决方案</h2>\n<h3 id=\"方案一\"><a class=\"markdownIt-Anchor\" href=\"#方案一\">#</a> 方案一</h3>\n<p>直接修改这个 sql, max 函数一点作用都没有<br>\n修改为</p>\n<pre><code>select id, verifyCode, used, phoneNumber, creteTime ...\nfrom sms where verifyCode &#x3D;  order by id desc limit 1;</code></pre>\n<p>这种方式简单，不需要其他中间件，改起来也快，但是不太容易扩展</p>\n<h3 id=\"方案二\"><a class=\"markdownIt-Anchor\" href=\"#方案二\">#</a> 方案二</h3>\n<p>借用 redis, key 自带过期时间的，能查询到就代表有效，之前的设计里面，还分为 无效验证码和过期验证码，真没必要，纯粹只有无效验证码</p>\n",
+            "tags": [
+                "mysql"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title> • Posts by &#34;硬件&#34; tag</title>
+        <link>http://example.com</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Sun, 09 Jun 2024 16:32:21 +0000</pubDate>
+        <lastBuildDate>Sun, 09 Jun 2024 16:32:21 +0000</lastBuildDate>
+        <category>超频</category>
+        <category>硬件</category>
+        <category>diy</category>
+        <category>pc</category>
+        <category>hexo</category>
+        <category>Shoka</category>
+        <category>ShokaX</category>
+        <category>mysql</category>
+        <category>java</category>
+        <category>定位</category>
+        <category>struts2</category>
+        <category>JVM</category>
+        <category>源码</category>
+        <category>websocket</category>
+        <category>工具</category>
+        <category>github</category>
+        <category>日常</category>
+        <category>动漫</category>
+        <item>
+            <guid isPermalink="true">http://example.com/2024/06/09/12400-OC/</guid>
+            <title>12400_OC</title>
+            <link>http://example.com/2024/06/09/12400-OC/</link>
+            <category>超频</category>
+            <category>硬件</category>
+            <pubDate>Sun, 09 Jun 2024 16:32:21 +0000</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;master-master-max&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#master-master-max&#34;&gt;#&lt;/a&gt; master -&amp;gt; master max&lt;/h2&gt;
+&lt;p&gt;最近电商 618, 12600kf 非常便宜，叠券只要 820, 虽然很想拿下，但是还是没法舍弃核显&lt;br&gt;
+主要是双屏，都用独显，光待机 GPU 功耗就 50W 了，我又是一个重来不喜欢关机的热&lt;/p&gt;
+&lt;h2 id=&#34;配置说明&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#配置说明&#34;&gt;#&lt;/a&gt; 配置说明&lt;/h2&gt;
+&lt;p&gt;系统   : Windows 11 专业版 64 位 版本号 22631.3737 (23H2)&lt;br&gt;
+ 处理器 : Intel Core i5-12400 核心数 6 线程数 12 工艺 Intel 7&lt;br&gt;
+ 显卡   :&lt;br&gt;
+Intel UHD Graphics 730&lt;br&gt;
+NVIDIA GeForce RTX 2080 Ti MSI 流处理器  256 显存  2048GGIGABYTE 流处理器  4352 显存  11G (GDDR6 Samsung)&lt;br&gt;
+ 主板   : MAG B660M MORTAR MAX WIFI DDR4 (MS-7D97) Micro-Star International Co., Ltd. 芯片组 Intel B660&lt;br&gt;
+ 硬盘   :&lt;br&gt;
+SAMSUNGMZVL2512HCJQ-00B00 实际容量 477GB 类型 SSD&lt;br&gt;
+ZHITAITiPlus50001TB 实际容量 954GB 类型 SSD&lt;br&gt;
+SeagateST4000VX015-3CU104 实际容量 3.64TB 类型 HDD&lt;br&gt;
+ 显示器 : Type_C  分辨率 2560*1600 刷新率 120Hz 屏幕尺寸 27 英寸&lt;br&gt;
+内存   :&lt;br&gt;
+Tanbassh  DDR4-3603   (1801 MHz) 16GBTanbassh  DDR4-3603   (1801 MHz) 16GB&lt;br&gt;
+Tanbassh  DDR4-3603   (1801 MHz) 16GBTanbassh  DDR4-3603   (1801 MHz) 16GB&lt;br&gt;
+ 容量 32 GB 通道 2 频率 3834 MHz 时序 17-20-20-40 2T&lt;/p&gt;
+&lt;h2 id=&#34;主板要求&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#主板要求&#34;&gt;#&lt;/a&gt; 主板要求&lt;/h2&gt;
+&lt;p&gt;首先由于是通过超外频，来提升主频，所以对主板是有要求的，想要尝试的朋友先得明确自己的主板是否可以超外频&lt;br&gt;
+以下步骤都是以微星 bios, 来进行的&lt;/p&gt;
+&lt;h2 id=&#34;主频&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#主频&#34;&gt;#&lt;/a&gt; 主频&lt;/h2&gt;
+&lt;p&gt;已调 CPU 频率，这个是我们最后超到的主频，我超到的 5.0 这里显示 5000&lt;br&gt;
+ 调整外频的时候，主频 ring 频 内存频率 核显频率都会上升，除了主频，其他三个我们都得去手动降低他&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;调整 P-CORE 倍频 这个默认好像就是 40 了&lt;/li&gt;
+&lt;li&gt;Advanced CPU Configuration 进去&lt;br&gt;
+ Intel C-State 禁止&lt;br&gt;
+ Intel Speed Shift Technology 禁止&lt;br&gt;
+下面有个那个功耗墙设置，是根据你的散热器来的，进 bios 的时候，会让你选现在是什么散热器，默认选水冷&lt;/li&gt;
+&lt;li&gt;Microcode Selection 选 Non K OC&lt;/li&gt;
+&lt;li&gt;CPU 基频给 125, 就是 100 -&amp;gt; 125 提升了 1/4 了，ring 频 内存频率 核显频率接下来我们去降低&lt;/li&gt;
+&lt;li&gt;Ring 倍频，这个我们调低，设置为 33, 此时 ring 频率为 4125 差不多，这个一般都是 主频 - 1Ghz, 在网上，没啥提升了&lt;br&gt;
+这个的作用，我理解是作用于 L3 缓存&lt;/li&gt;
+&lt;li&gt;GT 倍频，这个就是核显的倍频，让 GT 频率和之前差不多就可以了，设置为 23&lt;/li&gt;
+&lt;li&gt;CPU Cooler Tuning 选水冷，水冷就是基本不会限制功耗墙了&lt;/li&gt;
+&lt;li&gt;数位电压设置 进去&lt;br&gt;
+ CPU 重载线校准控制，直接 mode3 或者 mode4&lt;/li&gt;
+&lt;li&gt;CPU Core 电压 这个 12400 一般都 1.2 开始弄&lt;/li&gt;
+&lt;li&gt;内存设置，自己手动去改回原来的，12400 一般都是 3200 c18&lt;/li&gt;
+&lt;li&gt;保存进系统，用 CPUZ 看下是否正常，去测试一下提升效果，如果进不了系统，CPU Core 电压加压开不了机就 0.02V 的加，加到能开机，如果一边就进去就跑测试&lt;/li&gt;
+&lt;li&gt;先跑下 CinebenchR23 这个压力一般，蓝屏了也是去加压，0.01V 的加&lt;/li&gt;
+&lt;li&gt;如果 R23 跑过了，CinebenchR15 跑一下，这个压力偏大，也是一样，蓝屏就加压，没有蓝屏的话，就减压也是 0.01V 这样减下去，&lt;br&gt;
+ 减压一次，测试一次，直到跑不过这个测试，这个时候，我们就知道了这颗 CPU 的极限是多少了，电压调到最后一次跑过测试的电压，&lt;br&gt;
+ 再加 0.03-0.04v, 这样以后重负载的情况下，就更加稳定了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;内存&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内存&#34;&gt;#&lt;/a&gt; 内存&lt;/h2&gt;
+&lt;h2 id=&#34;提升幅度&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#提升幅度&#34;&gt;#&lt;/a&gt; 提升幅度&lt;/h2&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
