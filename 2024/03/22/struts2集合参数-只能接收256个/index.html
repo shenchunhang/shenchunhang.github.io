@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="null" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="null" type="application/atom+xml"><link rel="alternate" type="application/json" href="http://example.com/feed.json"/><link rel="preconnect" href="https://lf9-cdn-tos.bytecdntp.com"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.2"><link rel="modulepreload" href="/js/chunk-F6EMYDIC.js"></link><link rel="modulepreload" href="/js/chunk-FWGTHCVY.js"></link><link rel="modulepreload" href="/js/chunk-QAWHJ5B3.js"></link><link rel="modulepreload" href="/js/index.esm-PNMKW4HX.js"></link><link rel="modulepreload" href="/js/post-KUUT44GF.js"></link><link rel="modulepreload" href="/js/quicklink-NFWQJ5WH.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://lsky.schsch.cn//i/2022/05/15/6280f05564d59.jpeg" as="image" fetchpriority="high"><link rel="preload" href="https://lsky.schsch.cn//i/2022/05/15/6280eff24a37b.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://lsky.schsch.cn//i/2022/05/15/6280efb3e1659.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://lsky.schsch.cn//i/2022/05/15/6280eff032a69.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://lsky.schsch.cn//i/2022/05/15/6280eee502673.jpg" as="image" fetchpriority="high"><link rel="preload" href="https://lsky.schsch.cn//i/2022/05/15/6280f052c0c29.jpg" as="image" fetchpriority="high"><meta name="keywords" content="java,struts2"/><link rel="canonical" href="http://example.com/2024/03/22/struts2%E9%9B%86%E5%90%88%E5%8F%82%E6%95%B0-%E5%8F%AA%E8%83%BD%E6%8E%A5%E6%94%B6256%E4%B8%AA/"><title>struts2集合参数-只能接收256个</title><meta name="generator" content="Hexo 7.2.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">struts2集合参数-只能接收256个</h1><div class="meta"><span class="item" title="创建时间：2024-03-22 21:47:32"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2024-03-22T21:47:32+08:00">2024-03-22</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>5.7k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>5 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">软件技术记录</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://lsky.schsch.cn//i/2022/05/15/6280f05564d59.jpeg&quot;);"></li><li class="item" style="background-image: url(&quot;https://lsky.schsch.cn//i/2022/05/15/6280eff24a37b.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://lsky.schsch.cn//i/2022/05/15/6280efb3e1659.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://lsky.schsch.cn//i/2022/05/15/6280eff032a69.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://lsky.schsch.cn//i/2022/05/15/6280eee502673.jpg&quot;);"></li><li class="item" style="background-image: url(&quot;https://lsky.schsch.cn//i/2022/05/15/6280f052c0c29.jpg&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="zh-CN"><link itemprop="mainEntityOfPage" href="http://example.com/2024/03/22/struts2%E9%9B%86%E5%90%88%E5%8F%82%E6%95%B0-%E5%8F%AA%E8%83%BD%E6%8E%A5%E6%94%B6256%E4%B8%AA/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="DAYS"/><meta itemprop="description" content="null, "/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name"/></span><div class="body md" itemprop="articleBody"><h2 id="背景"><a class="markdownIt-Anchor" href="#背景">#</a> 背景</h2>
+<p>测试那边转过来一个问题单，开发这边初步定位是 struts 框架接收集合参数只能接收到 256 个</p>
+<h2 id="定位"><a class="markdownIt-Anchor" href="#定位">#</a> 定位</h2>
+<h3 id="google一下"><a class="markdownIt-Anchor" href="#google一下">#</a> google 一下</h3>
+<p>先直接 google 了一下，感觉回答有点偏，说是 struts2.5.15 升级到 2.5.30 就会有这个问题，是 struts 改用 ArrayList 的 TypeConverter, 我自己去代码里面看根本咩有限制</p>
+<pre><code>
+public Object convertValue(Map&lt;String, Object&gt; context, Object target, Member member, String propertyName, Object value, Class toType) {
+Collection result;
+Class memberType &#x3D; String.class;
+    if (target !&#x3D; null) {
+        memberType &#x3D; objectTypeDeterminer.getElementClass(target.getClass(), propertyName, null);
+        if (memberType &#x3D;&#x3D; null) {
+            memberType &#x3D; String.class;
+        }
+    }
+    if (toType.isAssignableFrom(value.getClass())) {
+        &#x2F;&#x2F; no need to do anything
+        result &#x3D; (Collection) value;
+    } else if (value.getClass().isArray()) {
+        Object[] objArray &#x3D; (Object[]) value;
+        TypeConverter converter &#x3D; getTypeConverter(context);
+        result &#x3D; createCollection(toType, memberType, objArray.length);
+        for (Object anObjArray : objArray) {
+            Object convertedValue &#x3D; converter.convertValue(context, target, member, propertyName, anObjArray, memberType);
+            if (!TypeConverter.NO_CONVERSION_POSSIBLE.equals(convertedValue)) {
+                result.add(convertedValue);
+            }
+        }
+    } else if (Collection.class.isAssignableFrom(value.getClass())) {
+        Collection col &#x3D; (Collection) value;
+        TypeConverter converter &#x3D; getTypeConverter(context);
+        result &#x3D; createCollection(toType, memberType, col.size());
+        for (Object aCol : col) {
+            Object convertedValue &#x3D; converter.convertValue(context, target, member, propertyName, aCol, memberType);
+            if (!TypeConverter.NO_CONVERSION_POSSIBLE.equals(convertedValue)) {
+                result.add(convertedValue);
+            }
+        }
+    } else {
+        result &#x3D; createCollection(toType, memberType, -1);
+        TypeConverter converter &#x3D; getTypeConverter(context);
+        Object convertedValue &#x3D; converter.convertValue(context, target, member, propertyName, value, memberType);
+        if (!TypeConverter.NO_CONVERSION_POSSIBLE.equals(convertedValue)) {
+            result.add(convertedValue);
+        }
+    }
+    return result;
+}</code></pre>
+<h4 id="strutsognlexpressionmaxlength"><a class="markdownIt-Anchor" href="#strutsognlexpressionmaxlength">#</a> struts.ognl.expressionMaxLength</h4>
+<p>这时候就这专门去 clone 了一下 struts 的仓库<br>
+先切换到 2.5.33 版本，然后曲剧检索了一下 256, 还真让找到了一处配置</p>
+<img loading="lazy" data-src="/2024/03/22/struts2%E9%9B%86%E5%90%88%E5%8F%82%E6%95%B0-%E5%8F%AA%E8%83%BD%E6%8E%A5%E6%94%B6256%E4%B8%AA/Snipaste_2024-04-22_22-01-35.png" class="" title="struts.ognl.expressionMaxLength">
+<p>但是被注释掉了，翻译过来，不配置的话，就不会被限制，实际情况，本来就没有设置这个参数，应该和在这个配置没有关系，而且实际给的参数列表超过了 256, 这个参数是接收 OGNL 的个数，我们出现的问题是 OGNL 集合参数被限制在 256 以内，</p>
+<h4 id="strutsognlautogrowthcollectionlimit"><a class="markdownIt-Anchor" href="#strutsognlautogrowthcollectionlimit">#</a> struts.ognl.autoGrowthCollectionLimit</h4>
+<p>无奈，只得继续看提交记录，好在提交记录 并不是很多，看着看着，又发现了一处</p>
+<pre><code>
+public Object getProperty(Map context, Object target, Object name) throws OgnlException {
+    if (ReflectionContextState.isGettingByKeyProperty(context)
+            || name.equals(XWorkCollectionPropertyAccessor.KEY_PROPERTY_FOR_CREATION)) {
+        return _sAcc.getProperty(context, target, name);
+    } else if (name instanceof String) {
+        return super.getProperty(context, target, name);
+    }
+    ReflectionContextState.updateCurrentPropertyPath(context, name);
+    Class lastClass &#x3D; (Class) context.get(XWorkConverter.LAST_BEAN_CLASS_ACCESSED);
+    String lastProperty &#x3D; (String) context.get(XWorkConverter.LAST_BEAN_PROPERTY_ACCESSED);
+    
+    if (name instanceof Number
+            &amp;&amp; ReflectionContextState.isCreatingNullObjects(context)
+            &amp;&amp; objectTypeDeterminer.shouldCreateIfNew(lastClass,lastProperty,target,null,true)) {
+
+        List list &#x3D; (List) target;
+        int index &#x3D; ((Number) name).intValue();
+        int listSize &#x3D; list.size();
+
+        if (lastClass &#x3D;&#x3D; null || lastProperty &#x3D;&#x3D; null) {
+            return super.getProperty(context, target, name);
+        }
+        Class beanClass &#x3D; objectTypeDeterminer.getElementClass(lastClass, lastProperty, name);
+        if (listSize &lt;&#x3D; index) {
+            Object result;
+            if (index &gt; autoGrowCollectionLimit) {
+                throw new OgnlException(&quot;Error auto growing collection size to &quot; + index + &quot; which limited to &quot;
+                                        + autoGrowCollectionLimit);
+            }
+            for (int i &#x3D; listSize; i &lt; index; i++) {
+                list.add(null);
+            }
+            try {
+                list.add(index, result &#x3D; objectFactory.buildBean(beanClass, context));
+            } catch (Exception exc) {
+                throw new XWorkException(exc);
+            }
+            return result;
+        } else if (list.get(index) &#x3D;&#x3D; null) {
+            Object result;
+            try {
+                list.set(index, result &#x3D; objectFactory.buildBean(beanClass, context));
+            } catch (Exception exc) {
+                throw new XWorkException(exc);
+            }
+            return result;
+        }
+    }
+    return super.getProperty(context, target, name);
+}</code></pre>
+<img loading="lazy" data-src="/2024/03/22/struts2%E9%9B%86%E5%90%88%E5%8F%82%E6%95%B0-%E5%8F%AA%E8%83%BD%E6%8E%A5%E6%94%B6256%E4%B8%AA/Snipaste_2024-04-22_22-28-18.png" class="" title="struts.ognl.autoGrowthCollectionLimit">
+<p>早知道就一起检索 255 了，还看了这么多提交记录，这次直接到 struts 的配置里面加上，测试了一下，果然可以</p>
+<h4 id="吐槽"><a class="markdownIt-Anchor" href="#吐槽">#</a> 吐槽</h4>
+<p>struts 真的可以，增加了 default 配置，也不写到版本更新里面去，还得自己来看源码才能知道</p>
+<h4 id="推想"><a class="markdownIt-Anchor" href="#推想">#</a> 推想</h4>
+<p>struts.ognl.expressionMaxLength 这个配置，看了一下他们的 issue, 还是感觉挺好笑的，2.5.21 加上后，2.5.22 又给注释掉，实际外发的版本 2.5.21 都没了，<br>
+<a target="_blank" rel="noopener" href="https://github.com/apache/struts/pull/380">struts.ognl.expressionMaxLength 讨论</a></p>
+<img loading="lazy" data-src="/2024/03/22/struts2%E9%9B%86%E5%90%88%E5%8F%82%E6%95%B0-%E5%8F%AA%E8%83%BD%E6%8E%A5%E6%94%B6256%E4%B8%AA/Snipaste_2024-04-22_22-44-21.png" class="" title="2.5.21缺失"><div class="tags"><a href="/tags/java/" rel="tag"><i class="ic i-tag"></i>java</a><a href="/tags/%E5%AE%9A%E4%BD%8D/" rel="tag"><i class="ic i-tag"></i>定位</a><a href="/tags/struts2/" rel="tag"><i class="ic i-tag"></i>struts2</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于</span><time title="修改时间：2024-10-16 23:05:49" itemprop="dateModified" datetime="2024-10-16T23:05:49+08:00">2024-10-16</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.png" alt="DAYS 微信支付"/><p>微信支付</p></div><div><img loading="lazy" data-src="/assets/alipay.png" alt="DAYS 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>DAYS<i class="ic i-at"><em>@</em></i></li><li class="link"><strong>本文链接：</strong><a href="http://example.com/2024/03/22/struts2%E9%9B%86%E5%90%88%E5%8F%82%E6%95%B0-%E5%8F%AA%E8%83%BD%E6%8E%A5%E6%94%B6256%E4%B8%AA/" title="struts2集合参数-只能接收256个">http://example.com/2024/03/22/struts2集合参数-只能接收256个/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/2023/09/15/oom-help/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;lsky.schsch.cn&#x2F;&#x2F;i&#x2F;2022&#x2F;05&#x2F;15&#x2F;6280ef19d4c82.jpg" title="快速定位OOM问题"><span class="type">上一篇</span><h3>快速定位OOM问题</h3></a></div><div class="item right"><a href="/2024/04/18/websocketClient%E8%AE%B0%E5%BE%97close/" rel="next" itemprop="url" data-background-image="https:&#x2F;&#x2F;lsky.schsch.cn&#x2F;&#x2F;i&#x2F;2022&#x2F;05&#x2F;15&#x2F;6280efb3e1659.jpg" title="websocketClient记得close"><span class="type">下一篇</span><h3>websocketClient记得close</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text"> 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text"> 定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#google%E4%B8%80%E4%B8%8B"><span class="toc-number">2.1.</span> <span class="toc-text"> google 一下</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#strutsognlexpressionmaxlength"><span class="toc-number">2.1.1.</span> <span class="toc-text"> struts.ognl.expressionMaxLength</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#strutsognlautogrowthcollectionlimit"><span class="toc-number">2.1.2.</span> <span class="toc-text"> struts.ognl.autoGrowthCollectionLimit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%90%E6%A7%BD"><span class="toc-number">2.1.3.</span> <span class="toc-text"> 吐槽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E6%83%B3"><span class="toc-number">2.1.4.</span> <span class="toc-text"> 推想</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="DAYS" src="/assets/avatar.jpg"/><p class="name" itemprop="name">DAYS</p><div class="description" itemprop="description"></div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">14</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">1</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">28</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/shenchunhang" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;shenchunhang"><i class="ic i-github"></i></a><a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=572335744" class="item qq" title="tencent:&#x2F;&#x2F;AddContact&#x2F;?fromId&#x3D;45&amp;fromSubId&#x3D;1&amp;subcmd&#x3D;all&amp;uin&#x3D;572335744"><i class="ic i-qq"></i></a><a target="_blank" rel="noopener" href="https://space.bilibili.com/5158635" class="item bilibili" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;5158635"><i class="ic i-bilibili"></i></a><a target="_blank" rel="noopener" href="https://music.163.com/#/user/home?id=330035644" class="item music" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;330035644"><i class="ic i-cloud-music"></i></a><a target="_blank" rel="noopener" href="https://weibo.com/u/6515997819" class="item weibo" title="https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6515997819"><i class="ic i-weibo"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/2024/04/18/websocketClient%E8%AE%B0%E5%BE%97close/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/2023/09/15/oom-help/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"></div><span><a href="/2024/06/09/12400-OC/">Intel i5-12400 超频指南</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/05/20/%E5%AE%9A%E4%BD%8D-%E5%BA%94%E7%94%A8%E9%A2%91%E7%B9%81FGC/">定位和解决应用频繁Full GC问题</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/04/22/websocket%E4%B8%89%E6%96%B9%E5%BC%80%E6%BA%90%E4%BB%B6%E5%8D%87%E7%BA%A7/">websocket三方开源件升级经验分享</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/03/22/struts2%E9%9B%86%E5%90%88%E5%8F%82%E6%95%B0-%E5%8F%AA%E8%83%BD%E6%8E%A5%E6%94%B6256%E4%B8%AA/">struts2集合参数-只能接收256个</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/04/21/max-http-header-size%E5%BC%95%E8%B5%B7%E7%9A%84OOM/">max-http-header-size引起的OOM</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2022/08/10/diypc/">记10年来, 再度DIY主机</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2023/09/15/oom-help/">快速定位OOM问题</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2021/04/07/sql-max-method/">验证码设计及mysql max函数</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/2024/04/18/websocketClient%E8%AE%B0%E5%BE%97close/">websocketClient记得close</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/%E5%85%B3%E4%BA%8E%E5%BC%80%E5%8F%91%E7%9A%84%E7%90%90%E4%BA%8B/" title="分类于关于开发的琐事">关于开发的琐事</a></div><span><a href="/2023/01/26/int-tinyint/">mysql 无符号数值类型与JAVA数值类型映射问题</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2020 -<span itemprop="copyrightYear">2024</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">DAYS @ 软件技术记录</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">27k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">24 分钟</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div><br/><span style="display:inline;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:var(--grey-5);"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">渝ICP备2024030534号-1</a></span></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+        path: `2024/03/22/struts2集合参数-只能接收256个/`,
+        favicon: {
+        show: `（●´3｀●）やれやれだぜ`,
+        hide: `(´Д｀)大変だ！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-6-M/pace/1.2.4/pace.min.js" async></script><script src="/js/siteInit.js?v=0.4.2" type="module" fetchpriority="high" defer></script></body></html>

@@ -1,0 +1,19 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "null • All posts by \"关于开发的琐事\" category",
+    "description": "",
+    "home_page_url": "http://example.com",
+    "items": [
+        {
+            "id": "http://example.com/2023/01/26/int-tinyint/",
+            "url": "http://example.com/2023/01/26/int-tinyint/",
+            "title": "mysql 无符号数值类型与JAVA数值类型映射问题",
+            "date_published": "2023-01-26T14:33:42.000Z",
+            "content_html": "<p>mysql 无符号数值类型与 JAVA 数值类型映射问题</p>\n<h3 id=\"起因\"><a class=\"markdownIt-Anchor\" href=\"#起因\">#</a> 起因</h3>\n<p>之前忙着弄的项目 1.0, 准备迁移到 2.0 了，需要专门做数据迁移，正好活也分了一部分过来，遇到问题，一个预期返回值类型为 Integer 的值，实际返回了 Long 类型回来，导致结果映射错误，一开始感觉没有道理呀，开发环境没有遇上呀，为啥测试环境能出这个问题，登上测试环境，一看数据库 这个字段 类型 是 int unsigned, 开发环境这个字段是 tinyint unsigned</p>\n<h3 id=\"定位\"><a class=\"markdownIt-Anchor\" href=\"#定位\">#</a> 定位</h3>\n<p>开发环境和测试环境，数据表字段类型不一致，估摸就是升级脚本有问题，我们开发环境一般都是直接新装，测试环境都一直升级，查了一下升级脚本，果然是升级脚本的问题<br>\n建表语句给定的类型是</p>\n<pre><code>tinyint unsigned</code></pre>\n<p>而升级脚本里面给定的类型是</p>\n<pre><code>int unsigned</code></pre>\n<p>在 Java 中，无符号数值并没有直接的原生类型支持. Java 的整数类型（byte, short, int, long）都是有符号的，int unsigned 最大值已经超过 Integer 最大值了，只能用 Long 接收，这次使用的是 JdbcTemplate, 其他的 ORM 框架还没试过，不过其他 ORM 框架都是基于 jdbc 开发，结果也应该是一样的</p>\n<h3 id=\"感想\"><a class=\"markdownIt-Anchor\" href=\"#感想\">#</a> 感想</h3>\n<p>真的少用 unsigned , 和 JAVA 不太搭，容易给别人埋坑</p>\n",
+            "tags": [
+                "mysql",
+                "java"
+            ]
+        }
+    ]
+}

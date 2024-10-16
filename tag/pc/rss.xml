@@ -1,0 +1,278 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title> • Posts by &#34;pc&#34; tag</title>
+        <link>http://example.com</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 10 Aug 2022 14:31:14 +0000</pubDate>
+        <lastBuildDate>Wed, 10 Aug 2022 14:31:14 +0000</lastBuildDate>
+        <category>超频</category>
+        <category>硬件</category>
+        <category>Intel</category>
+        <category>i5-12400</category>
+        <category>diy</category>
+        <category>pc</category>
+        <category>Docker</category>
+        <category>Redis</category>
+        <category>Windows</category>
+        <category>安装教程</category>
+        <category>hexo</category>
+        <category>Shoka</category>
+        <category>ShokaX</category>
+        <category>mysql</category>
+        <category>java</category>
+        <category>定位</category>
+        <category>struts2</category>
+        <category>JVM</category>
+        <category>源码</category>
+        <category>websocket</category>
+        <category>依赖升级</category>
+        <category>安全漏洞</category>
+        <category>性能优化</category>
+        <category>垃圾回收</category>
+        <category>工具</category>
+        <category>github</category>
+        <category>日常</category>
+        <category>动漫</category>
+        <item>
+            <guid isPermalink="true">http://example.com/2022/08/10/diypc/</guid>
+            <title>记10年来, 再度DIY主机</title>
+            <link>http://example.com/2022/08/10/diypc/</link>
+            <category>diy</category>
+            <category>pc</category>
+            <pubDate>Wed, 10 Aug 2022 14:31:14 +0000</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;原因&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#原因&#34;&gt;#&lt;/a&gt; 原因&lt;/h2&gt;
+&lt;p&gt;我的笔记本 2015 年买的，已经用了快 7 年了，终于凉了，不得不搞一台电脑来用，上一次自己装机好像都过了 10 年了.&lt;/p&gt;
+&lt;h2 id=&#34;平台选择&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#平台选择&#34;&gt;#&lt;/a&gt; 平台选择&lt;/h2&gt;
+&lt;p&gt;平台也就两种可选择，AMD or Intel, AMD 一直都没接触过，不太敢碰，Intel 摸过 G502 Q6600 I3-3240,&lt;br&gt;
+ 感觉还是对 Intel 更熟悉一些，而且 Intel 核显不阉割核心，我也没玩什么单机游戏，就玩玩 LOL, 暂时用核显应该也是够用的&lt;/p&gt;
+&lt;h2 id=&#34;cpu&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#cpu&#34;&gt;#&lt;/a&gt; CPU&lt;/h2&gt;
+&lt;p&gt;CPU 没啥说的 12 代相较于 11 代提升还是很大的，来看下规格&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;型号&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;核心&lt;br/&gt;线程数&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;P-Core 频率 &lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;E-Core 频率&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;L3 缓存&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;功耗&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;内存速度&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;核显&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i9-1290&lt;br/&gt;Core i9-12900KF&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8P+8E/24&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3.2/5.2 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.4/3.9 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;30MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;241/125W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770 N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i9-12900&lt;br/&gt;Core i9-12900F&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8P+8E/24&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.4/5.1 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.8/3.8 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;30MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;202/65W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770 N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i9-12900T&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8P+8E/24&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.4/4.9 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.0/3.6 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;30MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;106/35W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i7-12700K&lt;br/&gt;Core i7-12700KF&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8P+4E/20&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3.6/5.0 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.7/3.8 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;25MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;190/125W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770 N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i7-12700&lt;br/&gt;Core i7-12700F&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8P+4E/20&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.1/4.9 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.6/3.6 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;25MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;180/65W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770 N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i7-12700T&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8P+4E/20&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.4/4.7 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.0/3.4 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;25MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;99/35W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i5-12600K&lt;br/&gt;Core i5-12600KF&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6P+4E/16&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3.7/4.9 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.8/3.6 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;20MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;150/125W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770 N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i5-12600&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6P+0E/12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3.3/4.8 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;18MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;117/65W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i5-12600T&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6P+0E/12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.1/4.6 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;18MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;74/35W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i5-12500&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6P+0E/12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3.0/4.6 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;18MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;117/65W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i5-12500T&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6P+0E/12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.0/4.4 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;18MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;74/35W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 770&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i5-12400&lt;br/&gt;Core i5-12400F&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6P+0E/12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.5/4.4 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;18MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;117/65W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 730 N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i5-12400T&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6P+0E/12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.8/4.2 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;18MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;74/35W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 730&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i3-12300&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4P+0E/8&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3.3/4.3 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;12MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;89/60W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 730&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i3-12300T&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4P+0E/8&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.3/4.2 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;12MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;69/35W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 730&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i3-12100&lt;br/&gt;Core i3-12100F&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4P+0E/8&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3.3/4.3 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;12MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;89/60W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 730&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Core i3-12100T&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4P+0E/8&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.2/4.1 GHz&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;N/A&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;12MB&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;69/35W&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;DDR5-4800 DDR4-3200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;UHD 730&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;虽然这上面看着很多，真正方便买到的，只有 12100 12400 12600 12700&lt;br&gt;
+12100 只有四核心，12600 12700 又太贵了，12400 和 12600 都是 6 大核，12600 也只是多了四个小核，12400 就是主频不如 12600, 不能超内存，其他的都还好&lt;/p&gt;
+&lt;h2 id=&#34;主板&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#主板&#34;&gt;#&lt;/a&gt; 主板&lt;/h2&gt;
+&lt;p&gt;主板选择上，H610 B660, 我选择了微星的 B660M 迫击炮 DDR4 WIFI 版本，方便以后升级，选 DDR4 的版本，主要是 D4 的条子比较便宜 D5 的都还挺贵的. wifi 很重要，租的房子里面拉网线到卧室很麻烦.&lt;/p&gt;
+&lt;h2 id=&#34;机箱&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#机箱&#34;&gt;#&lt;/a&gt; 机箱&lt;/h2&gt;
+&lt;p&gt;机箱，我看了不少了，一开始想上 ITX 的，但是感觉自己不是很会装机，理线也不会，还是放弃 ITX, 从 MATX 机箱里面找，瞧中了乔思伯 D30, 选的白色版本，银色顶盖是黑色的，害，要是银色的应该也是白色，我应该就买银色了&lt;/p&gt;
+&lt;h2 id=&#34;电源&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#电源&#34;&gt;#&lt;/a&gt; 电源&lt;/h2&gt;
+&lt;p&gt;电源是顺带买机箱的时候，一起在京东上面买的，海韵 CORE GX650, 650W 应该是够了的，买来装机的时候发现，线材超级硬，插线真是苦了我&lt;/p&gt;
+&lt;h2 id=&#34;内存&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内存&#34;&gt;#&lt;/a&gt; 内存&lt;/h2&gt;
+&lt;p&gt;因为 12400 D4 不能超频，默认最高就 3200, 所以我指的最便宜的买，也是在京东上面买的 光威天策 3200 16G*2&lt;/p&gt;
+&lt;h3 id=&#34;超频&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#超频&#34;&gt;#&lt;/a&gt; 超频&lt;/h3&gt;
+&lt;p&gt;试了一下内存超频，只能超到 3500 c18&lt;br&gt;
+12400 SA 电压有 0.981V 看了颗粒 垃圾玩意，干&lt;/p&gt;
+&lt;h2 id=&#34;散热器&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#散热器&#34;&gt;#&lt;/a&gt; 散热器&lt;/h2&gt;
+&lt;p&gt;咸鱼上面淘了个 PA120 6 热管的，装机的时候，后悔了，很大，机箱又不是 ATX, 很难装，没有足够长的螺丝刀，拧螺丝很麻烦&lt;/p&gt;
+&lt;h2 id=&#34;硬盘&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#硬盘&#34;&gt;#&lt;/a&gt; 硬盘&lt;/h2&gt;
+&lt;p&gt;硬盘，我选的 PM981A 这个是三星 980pro 的 OEM 版本，性能很强 512G 系统盘够了&lt;/p&gt;
+&lt;h3 id=&#34;20220822-加装机械硬盘&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#20220822-加装机械硬盘&#34;&gt;#&lt;/a&gt; 20220822 加装机械硬盘&lt;/h3&gt;
+&lt;p&gt;买了块海康威视 希捷监控盘 4T&lt;br&gt;
+ 型号 ST4000VX015-3CU104, 挺不错的，也学会用 qbittorrent 了，可以用来下载动漫&lt;/p&gt;
+&lt;h3 id=&#34;20221210-加装固态硬盘&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#20221210-加装固态硬盘&#34;&gt;#&lt;/a&gt; 20221210 加装固态硬盘&lt;/h3&gt;
+&lt;p&gt;最近致钛很火呀，又便宜，支持国产&lt;br&gt;
+型号 ZHITAI TiPlus5000 只花了 414, 用了 99 元的拼多多券&lt;/p&gt;
+&lt;h2 id=&#34;机箱风扇&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#机箱风扇&#34;&gt;#&lt;/a&gt; 机箱风扇&lt;/h2&gt;
+&lt;p&gt;风扇也是在咸鱼上面买的，5 把工包利民 3 正 2 反，还有 ARGB 极速 1500&lt;/p&gt;
+&lt;h2 id=&#34;遇到的麻烦&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#遇到的麻烦&#34;&gt;#&lt;/a&gt; 遇到的麻烦&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;电源的线材很硬，非常难插&lt;/li&gt;
+&lt;li&gt;散热器很大，没办法先装在主板上，不然我拧不到主板的螺丝，装上主板后，再装散热器双塔也很深，我还是不容易拧到散热器螺丝 (螺丝刀太短了)&lt;/li&gt;
+&lt;li&gt;5 把风扇，很难接线，3 把出风的扇子，我接的水泵的，两把底部入风，我接的系统风扇，插线很麻烦&lt;/li&gt;
+&lt;li&gt;装完风扇后，再装跳线，难得要死&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;下一次装机&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#下一次装机&#34;&gt;#&lt;/a&gt; 下一次装机&lt;/h2&gt;
+&lt;p&gt;换水冷吧，风冷感觉好麻烦&lt;br&gt;
+电源线材用软一点的，有那种带编织线的&lt;br&gt;
+电源可以最后装的的，因为电源连主板的线，只有 CPU 和 24pin 主板线，最后装应该很轻松&lt;br&gt;
+机箱 D30 感觉背部空间好少，本来想把多出来的线都移到后面的，放不下，只能都堆到前面来&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

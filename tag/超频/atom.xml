@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title> • Posts by &#34;超频&#34; tag</title>
+    <link href="http://example.com" />
+    <updated>2024-06-09T16:32:21.000Z</updated>
+    <category term="超频" />
+    <category term="硬件" />
+    <category term="Intel" />
+    <category term="i5-12400" />
+    <category term="diy" />
+    <category term="pc" />
+    <category term="Docker" />
+    <category term="Redis" />
+    <category term="Windows" />
+    <category term="安装教程" />
+    <category term="hexo" />
+    <category term="Shoka" />
+    <category term="ShokaX" />
+    <category term="mysql" />
+    <category term="java" />
+    <category term="定位" />
+    <category term="struts2" />
+    <category term="JVM" />
+    <category term="源码" />
+    <category term="websocket" />
+    <category term="依赖升级" />
+    <category term="安全漏洞" />
+    <category term="性能优化" />
+    <category term="垃圾回收" />
+    <category term="工具" />
+    <category term="github" />
+    <category term="日常" />
+    <category term="动漫" />
+    <entry>
+        <id>http://example.com/2024/06/09/12400-OC/</id>
+        <title>Intel i5-12400 超频指南</title>
+        <link rel="alternate" href="http://example.com/2024/06/09/12400-OC/"/>
+        <content type="html">&lt;h2 id=&#34;前言&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h2&gt;
+&lt;p&gt;最近电商 618 活动，12600KF 价格非常诱人，叠加优惠券只需 820 元。虽然很想入手，但考虑到我使用双屏且不喜欢关机，还是决定保留核显以降低待机功耗。因此，我们今天来探讨如何将 i5-12400 超频到接近 12600K 的性能水平。&lt;/p&gt;
+
+&lt;h2 id=&#34;系统配置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#系统配置&#34;&gt;#&lt;/a&gt; 系统配置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;操作系统: Windows 11 专业版 64 位 (版本 22631.3737, 23H2)&lt;/li&gt;
+&lt;li&gt;处理器: Intel Core i5-12400 (6 核 12 线程，Intel 7 工艺)&lt;/li&gt;
+&lt;li&gt;显卡:
+&lt;ul&gt;
+&lt;li&gt;集成显卡: Intel UHD Graphics 730&lt;/li&gt;
+&lt;li&gt;独立显卡: NVIDIA GeForce RTX 2080 Ti (11GB GDDR6)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;主板: MSI MAG B660M MORTAR MAX WIFI DDR4 (MS-7D97)&lt;/li&gt;
+&lt;li&gt;存储:
+&lt;ul&gt;
+&lt;li&gt;SAMSUNG MZVL2512HCJQ-00B00 SSD (477GB)&lt;/li&gt;
+&lt;li&gt;ZHITAI TiPlus5000 1TB SSD (954GB)&lt;/li&gt;
+&lt;li&gt;Seagate ST4000VX015-3CU104 HDD (3.64TB)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;显示器: 27 英寸，2560x1600 分辨率，120Hz 刷新率&lt;/li&gt;
+&lt;li&gt;内存: 32GB (4x8GB) Tanbassh DDR4-3603 (实际运行于 3834MHz, 时序 17-20-20-40 2T)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;超频准备&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#超频准备&#34;&gt;#&lt;/a&gt; 超频准备&lt;/h2&gt;
+&lt;h3 id=&#34;主板要求&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#主板要求&#34;&gt;#&lt;/a&gt; 主板要求&lt;/h3&gt;
+&lt;p&gt;由于我们将通过提升外频来增加 CPU 主频，因此主板必须支持外频调整。本指南基于微星 (MSI) 主板 BIOS 进行，请确保您的主板具有类似功能。&lt;/p&gt;
+
+&lt;h2 id=&#34;超频步骤&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#超频步骤&#34;&gt;#&lt;/a&gt; 超频步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;进入 BIOS, 将 CPU 频率调整至目标值 (本例中为 5000MHz)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调整 P-CORE 倍频 (通常默认为 40)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 &amp;quot;Advanced CPU Configuration&amp;quot; 中:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;禁用 Intel C-State&lt;/li&gt;
+&lt;li&gt;禁用 Intel Speed Shift Technology&lt;/li&gt;
+&lt;li&gt;根据散热器选择合适的功耗墙设置 (建议选择水冷)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;将 &amp;quot;Microcode Selection&amp;quot; 设置为 &amp;quot;Non K OC&amp;quot;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将 CPU 基频从 100MHz 提升至 125MHz (提升 25%)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;降低 Ring 倍频至 33, 使 Ring 频率约为 4125MHz (通常保持在主频 - 1GHz 左右)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调整 GT 倍频 (核显), 使其频率与原始设置相近，本例中设为 23。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 &amp;quot;CPU Cooler Tuning&amp;quot; 中选择水冷，以最大化功耗限制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 &amp;quot;数位电压设置&amp;quot; 中:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将 CPU 负载线校准 (LLC) 设置为 Mode 3 或 Mode 4&lt;/li&gt;
+&lt;li&gt;初始 CPU Core 电压设置为 1.2V&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;手动调整内存设置，恢复至原始参数 (通常为 DDR4-3200 CL18)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;保存设置并进入系统，使用 CPU-Z 验证更改是否生效。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ol start=&#34;12&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;进行稳定性测试:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先运行 Cinebench R23 (中等压力测试)&lt;/li&gt;
+&lt;li&gt;如遇蓝屏，逐步增加 CPU 电压 (每次 + 0.02V) 直至稳定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过 Cinebench R23 后，运行 Cinebench R15 (高压力测试):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;蓝屏时增加电压 (每次 + 0.01V)&lt;/li&gt;
+&lt;li&gt;稳定后尝试降低电压 (每次 - 0.01V), 直到找到最低稳定电压&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;确定最低稳定电压后，建议额外增加 0.03-0.04V 作为安全裕度，以确保长期稳定性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;性能提升&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#性能提升&#34;&gt;#&lt;/a&gt; 性能提升&lt;/h2&gt;
+&lt;p&gt;// TODO: 添加超频前后的性能对比数据&lt;/p&gt;
+
+&lt;h2 id=&#34;注意事项&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#注意事项&#34;&gt;#&lt;/a&gt; 注意事项&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;超频可能会导致处理器寿命缩短，请谨慎操作。&lt;/li&gt;
+&lt;li&gt;确保有足够的散热能力，建议使用高质量散热器。&lt;/li&gt;
+&lt;li&gt;超频可能会影响系统稳定性，请进行充分的稳定性测试。&lt;/li&gt;
+&lt;li&gt;不同的 CPU 样品可能有不同的超频潜力，您的结果可能与本指南有所不同。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;结语&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#结语&#34;&gt;#&lt;/a&gt; 结语&lt;/h2&gt;
+&lt;p&gt;通过适当的超频，我们可以将 i5-12400 的性能提升到接近 12600K 的水平，同时保留了核显的优势。希望本指南能够帮助您充分发挥处理器的潜力。如有任何问题，欢迎在评论区讨论。&lt;/p&gt;
+</content>
+        <category term="超频" />
+        <category term="硬件" />
+        <category term="Intel" />
+        <category term="i5-12400" />
+        <updated>2024-06-09T16:32:21.000Z</updated>
+    </entry>
+</feed>

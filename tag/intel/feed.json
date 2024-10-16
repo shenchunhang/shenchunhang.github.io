@@ -1,0 +1,21 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "null • All posts by \"intel\" tag",
+    "description": "",
+    "home_page_url": "http://example.com",
+    "items": [
+        {
+            "id": "http://example.com/2024/06/09/12400-OC/",
+            "url": "http://example.com/2024/06/09/12400-OC/",
+            "title": "Intel i5-12400 超频指南",
+            "date_published": "2024-06-09T16:32:21.000Z",
+            "content_html": "<h2 id=\"前言\"><a class=\"markdownIt-Anchor\" href=\"#前言\">#</a> 前言</h2>\n<p>最近电商 618 活动，12600KF 价格非常诱人，叠加优惠券只需 820 元。虽然很想入手，但考虑到我使用双屏且不喜欢关机，还是决定保留核显以降低待机功耗。因此，我们今天来探讨如何将 i5-12400 超频到接近 12600K 的性能水平。</p>\n\n<h2 id=\"系统配置\"><a class=\"markdownIt-Anchor\" href=\"#系统配置\">#</a> 系统配置</h2>\n<ul>\n<li>操作系统: Windows 11 专业版 64 位 (版本 22631.3737, 23H2)</li>\n<li>处理器: Intel Core i5-12400 (6 核 12 线程，Intel 7 工艺)</li>\n<li>显卡:\n<ul>\n<li>集成显卡: Intel UHD Graphics 730</li>\n<li>独立显卡: NVIDIA GeForce RTX 2080 Ti (11GB GDDR6)</li>\n</ul>\n</li>\n<li>主板: MSI MAG B660M MORTAR MAX WIFI DDR4 (MS-7D97)</li>\n<li>存储:\n<ul>\n<li>SAMSUNG MZVL2512HCJQ-00B00 SSD (477GB)</li>\n<li>ZHITAI TiPlus5000 1TB SSD (954GB)</li>\n<li>Seagate ST4000VX015-3CU104 HDD (3.64TB)</li>\n</ul>\n</li>\n<li>显示器: 27 英寸，2560x1600 分辨率，120Hz 刷新率</li>\n<li>内存: 32GB (4x8GB) Tanbassh DDR4-3603 (实际运行于 3834MHz, 时序 17-20-20-40 2T)</li>\n</ul>\n\n<h2 id=\"超频准备\"><a class=\"markdownIt-Anchor\" href=\"#超频准备\">#</a> 超频准备</h2>\n<h3 id=\"主板要求\"><a class=\"markdownIt-Anchor\" href=\"#主板要求\">#</a> 主板要求</h3>\n<p>由于我们将通过提升外频来增加 CPU 主频，因此主板必须支持外频调整。本指南基于微星 (MSI) 主板 BIOS 进行，请确保您的主板具有类似功能。</p>\n\n<h2 id=\"超频步骤\"><a class=\"markdownIt-Anchor\" href=\"#超频步骤\">#</a> 超频步骤</h2>\n<ol>\n<li>\n<p>进入 BIOS, 将 CPU 频率调整至目标值 (本例中为 5000MHz)。</p>\n</li>\n<li>\n<p>调整 P-CORE 倍频 (通常默认为 40)。</p>\n</li>\n<li>\n<p>在 &quot;Advanced CPU Configuration&quot; 中:</p>\n<ul>\n<li>禁用 Intel C-State</li>\n<li>禁用 Intel Speed Shift Technology</li>\n<li>根据散热器选择合适的功耗墙设置 (建议选择水冷)</li>\n</ul>\n</li>\n</ol>\n\n<ol start=\"4\">\n<li>\n<p>将 &quot;Microcode Selection&quot; 设置为 &quot;Non K OC&quot;。</p>\n</li>\n<li>\n<p>将 CPU 基频从 100MHz 提升至 125MHz (提升 25%)。</p>\n</li>\n<li>\n<p>降低 Ring 倍频至 33, 使 Ring 频率约为 4125MHz (通常保持在主频 - 1GHz 左右)。</p>\n</li>\n<li>\n<p>调整 GT 倍频 (核显), 使其频率与原始设置相近，本例中设为 23。</p>\n</li>\n<li>\n<p>在 &quot;CPU Cooler Tuning&quot; 中选择水冷，以最大化功耗限制。</p>\n</li>\n<li>\n<p>在 &quot;数位电压设置&quot; 中:</p>\n<ul>\n<li>将 CPU 负载线校准 (LLC) 设置为 Mode 3 或 Mode 4</li>\n<li>初始 CPU Core 电压设置为 1.2V</li>\n</ul>\n</li>\n</ol>\n\n<ol start=\"10\">\n<li>\n<p>手动调整内存设置，恢复至原始参数 (通常为 DDR4-3200 CL18)。</p>\n</li>\n<li>\n<p>保存设置并进入系统，使用 CPU-Z 验证更改是否生效。</p>\n</li>\n</ol>\n\n<ol start=\"12\">\n<li>\n<p>进行稳定性测试:</p>\n<ul>\n<li>首先运行 Cinebench R23 (中等压力测试)</li>\n<li>如遇蓝屏，逐步增加 CPU 电压 (每次 + 0.02V) 直至稳定</li>\n</ul>\n</li>\n<li>\n<p>通过 Cinebench R23 后，运行 Cinebench R15 (高压力测试):</p>\n<ul>\n<li>蓝屏时增加电压 (每次 + 0.01V)</li>\n<li>稳定后尝试降低电压 (每次 - 0.01V), 直到找到最低稳定电压</li>\n</ul>\n</li>\n<li>\n<p>确定最低稳定电压后，建议额外增加 0.03-0.04V 作为安全裕度，以确保长期稳定性。</p>\n</li>\n</ol>\n\n<h2 id=\"性能提升\"><a class=\"markdownIt-Anchor\" href=\"#性能提升\">#</a> 性能提升</h2>\n<p>// TODO: 添加超频前后的性能对比数据</p>\n\n<h2 id=\"注意事项\"><a class=\"markdownIt-Anchor\" href=\"#注意事项\">#</a> 注意事项</h2>\n<ol>\n<li>超频可能会导致处理器寿命缩短，请谨慎操作。</li>\n<li>确保有足够的散热能力，建议使用高质量散热器。</li>\n<li>超频可能会影响系统稳定性，请进行充分的稳定性测试。</li>\n<li>不同的 CPU 样品可能有不同的超频潜力，您的结果可能与本指南有所不同。</li>\n</ol>\n\n<h2 id=\"结语\"><a class=\"markdownIt-Anchor\" href=\"#结语\">#</a> 结语</h2>\n<p>通过适当的超频，我们可以将 i5-12400 的性能提升到接近 12600K 的水平，同时保留了核显的优势。希望本指南能够帮助您充分发挥处理器的潜力。如有任何问题，欢迎在评论区讨论。</p>\n",
+            "tags": [
+                "超频",
+                "硬件",
+                "Intel",
+                "i5-12400"
+            ]
+        }
+    ]
+}

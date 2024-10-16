@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title> • Posts by &#34;mysql&#34; tag</title>
+    <link href="http://example.com" />
+    <updated>2023-01-26T14:33:42.000Z</updated>
+    <category term="超频" />
+    <category term="硬件" />
+    <category term="Intel" />
+    <category term="i5-12400" />
+    <category term="diy" />
+    <category term="pc" />
+    <category term="Docker" />
+    <category term="Redis" />
+    <category term="Windows" />
+    <category term="安装教程" />
+    <category term="hexo" />
+    <category term="Shoka" />
+    <category term="ShokaX" />
+    <category term="mysql" />
+    <category term="java" />
+    <category term="定位" />
+    <category term="struts2" />
+    <category term="JVM" />
+    <category term="源码" />
+    <category term="websocket" />
+    <category term="依赖升级" />
+    <category term="安全漏洞" />
+    <category term="性能优化" />
+    <category term="垃圾回收" />
+    <category term="工具" />
+    <category term="github" />
+    <category term="日常" />
+    <category term="动漫" />
+    <entry>
+        <id>http://example.com/2023/01/26/int-tinyint/</id>
+        <title>mysql 无符号数值类型与JAVA数值类型映射问题</title>
+        <link rel="alternate" href="http://example.com/2023/01/26/int-tinyint/"/>
+        <content type="html">&lt;p&gt;mysql 无符号数值类型与 JAVA 数值类型映射问题&lt;/p&gt;
+&lt;h3 id=&#34;起因&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#起因&#34;&gt;#&lt;/a&gt; 起因&lt;/h3&gt;
+&lt;p&gt;之前忙着弄的项目 1.0, 准备迁移到 2.0 了，需要专门做数据迁移，正好活也分了一部分过来，遇到问题，一个预期返回值类型为 Integer 的值，实际返回了 Long 类型回来，导致结果映射错误，一开始感觉没有道理呀，开发环境没有遇上呀，为啥测试环境能出这个问题，登上测试环境，一看数据库 这个字段 类型 是 int unsigned, 开发环境这个字段是 tinyint unsigned&lt;/p&gt;
+&lt;h3 id=&#34;定位&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#定位&#34;&gt;#&lt;/a&gt; 定位&lt;/h3&gt;
+&lt;p&gt;开发环境和测试环境，数据表字段类型不一致，估摸就是升级脚本有问题，我们开发环境一般都是直接新装，测试环境都一直升级，查了一下升级脚本，果然是升级脚本的问题&lt;br&gt;
+建表语句给定的类型是&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tinyint unsigned&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;而升级脚本里面给定的类型是&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int unsigned&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在 Java 中，无符号数值并没有直接的原生类型支持. Java 的整数类型（byte, short, int, long）都是有符号的，int unsigned 最大值已经超过 Integer 最大值了，只能用 Long 接收，这次使用的是 JdbcTemplate, 其他的 ORM 框架还没试过，不过其他 ORM 框架都是基于 jdbc 开发，结果也应该是一样的&lt;/p&gt;
+&lt;h3 id=&#34;感想&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#感想&#34;&gt;#&lt;/a&gt; 感想&lt;/h3&gt;
+&lt;p&gt;真的少用 unsigned , 和 JAVA 不太搭，容易给别人埋坑&lt;/p&gt;
+</content>
+        <category term="mysql" />
+        <category term="java" />
+        <updated>2023-01-26T14:33:42.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2021/04/07/sql-max-method/</id>
+        <title>验证码设计及mysql max函数</title>
+        <link rel="alternate" href="http://example.com/2021/04/07/sql-max-method/"/>
+        <content type="html">&lt;h2 id=&#34;起因&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#起因&#34;&gt;#&lt;/a&gt; 起因&lt;/h2&gt;
+&lt;p&gt;事情是这样的，一线有反馈存在验证码的问题，频率为偶现，接到反馈后，我还有点懵，有问题就有问题嘛，还是偶现问题&lt;/p&gt;
+&lt;h2 id=&#34;定位&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#定位&#34;&gt;#&lt;/a&gt; 定位&lt;/h2&gt;
+&lt;p&gt;我先自己测试环境试了一下，连着 10 个验证码都没有这个问题，又到生产环境试了 10 个，也没有这个问题，哦嗬，那没法了，问题没法复现，那先看下日志吧，问了一下一线的同事，没给啥信息出来，那就只能代码走读了，然后就一层一层网上扒，一阵看下来，发现这个 查询验证码的 sql 问题很大&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select max(id), verifyCode, used, phoneNumber, creteTime ...
+from sms where verifyCode &amp;#x3D;  limit 1;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;max 函数只对结果集的对应参数列有效，和其他列无关系，这个 sql 查询到的结果&lt;br&gt;
+只能查询到 verifyCode 对应最早的一条数据，这样的问题居然到我这里才爆出来，运气挺好&lt;br&gt;
+ 6 位的验证码，也就是这种实现逻辑下，只有 899999 个有效值，哈哈哈，应该还是当初代码检视太随意了&lt;/p&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#解决方案&#34;&gt;#&lt;/a&gt; 解决方案&lt;/h2&gt;
+&lt;h3 id=&#34;方案一&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#方案一&#34;&gt;#&lt;/a&gt; 方案一&lt;/h3&gt;
+&lt;p&gt;直接修改这个 sql, max 函数一点作用都没有&lt;br&gt;
+修改为&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select id, verifyCode, used, phoneNumber, creteTime ...
+from sms where verifyCode &amp;#x3D;  order by id desc limit 1;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这种方式简单，不需要其他中间件，改起来也快，但是不太容易扩展&lt;/p&gt;
+&lt;h3 id=&#34;方案二&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#方案二&#34;&gt;#&lt;/a&gt; 方案二&lt;/h3&gt;
+&lt;p&gt;借用 redis, key 自带过期时间的，能查询到就代表有效，之前的设计里面，还分为 无效验证码和过期验证码，真没必要，纯粹只有无效验证码&lt;/p&gt;
+</content>
+        <category term="mysql" />
+        <updated>2021-04-07T14:28:51.000Z</updated>
+    </entry>
+</feed>

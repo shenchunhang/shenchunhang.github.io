@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title> • Posts by &#34;关于开发的琐事&#34; category</title>
+    <link href="http://example.com" />
+    <updated>2023-01-26T14:33:42.000Z</updated>
+    <category term="超频" />
+    <category term="硬件" />
+    <category term="Intel" />
+    <category term="i5-12400" />
+    <category term="diy" />
+    <category term="pc" />
+    <category term="Docker" />
+    <category term="Redis" />
+    <category term="Windows" />
+    <category term="安装教程" />
+    <category term="hexo" />
+    <category term="Shoka" />
+    <category term="ShokaX" />
+    <category term="mysql" />
+    <category term="java" />
+    <category term="定位" />
+    <category term="struts2" />
+    <category term="JVM" />
+    <category term="源码" />
+    <category term="websocket" />
+    <category term="依赖升级" />
+    <category term="安全漏洞" />
+    <category term="性能优化" />
+    <category term="垃圾回收" />
+    <category term="工具" />
+    <category term="github" />
+    <category term="日常" />
+    <category term="动漫" />
+    <entry>
+        <id>http://example.com/2023/01/26/int-tinyint/</id>
+        <title>mysql 无符号数值类型与JAVA数值类型映射问题</title>
+        <link rel="alternate" href="http://example.com/2023/01/26/int-tinyint/"/>
+        <content type="html">&lt;p&gt;mysql 无符号数值类型与 JAVA 数值类型映射问题&lt;/p&gt;
+&lt;h3 id=&#34;起因&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#起因&#34;&gt;#&lt;/a&gt; 起因&lt;/h3&gt;
+&lt;p&gt;之前忙着弄的项目 1.0, 准备迁移到 2.0 了，需要专门做数据迁移，正好活也分了一部分过来，遇到问题，一个预期返回值类型为 Integer 的值，实际返回了 Long 类型回来，导致结果映射错误，一开始感觉没有道理呀，开发环境没有遇上呀，为啥测试环境能出这个问题，登上测试环境，一看数据库 这个字段 类型 是 int unsigned, 开发环境这个字段是 tinyint unsigned&lt;/p&gt;
+&lt;h3 id=&#34;定位&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#定位&#34;&gt;#&lt;/a&gt; 定位&lt;/h3&gt;
+&lt;p&gt;开发环境和测试环境，数据表字段类型不一致，估摸就是升级脚本有问题，我们开发环境一般都是直接新装，测试环境都一直升级，查了一下升级脚本，果然是升级脚本的问题&lt;br&gt;
+建表语句给定的类型是&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tinyint unsigned&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;而升级脚本里面给定的类型是&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int unsigned&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在 Java 中，无符号数值并没有直接的原生类型支持. Java 的整数类型（byte, short, int, long）都是有符号的，int unsigned 最大值已经超过 Integer 最大值了，只能用 Long 接收，这次使用的是 JdbcTemplate, 其他的 ORM 框架还没试过，不过其他 ORM 框架都是基于 jdbc 开发，结果也应该是一样的&lt;/p&gt;
+&lt;h3 id=&#34;感想&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#感想&#34;&gt;#&lt;/a&gt; 感想&lt;/h3&gt;
+&lt;p&gt;真的少用 unsigned , 和 JAVA 不太搭，容易给别人埋坑&lt;/p&gt;
+</content>
+        <category term="mysql" />
+        <category term="java" />
+        <updated>2023-01-26T14:33:42.000Z</updated>
+    </entry>
+</feed>

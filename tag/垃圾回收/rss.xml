@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title> • Posts by &#34;垃圾回收&#34; tag</title>
+        <link>http://example.com</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 20 May 2023 13:17:01 +0000</pubDate>
+        <lastBuildDate>Sat, 20 May 2023 13:17:01 +0000</lastBuildDate>
+        <category>超频</category>
+        <category>硬件</category>
+        <category>Intel</category>
+        <category>i5-12400</category>
+        <category>diy</category>
+        <category>pc</category>
+        <category>Docker</category>
+        <category>Redis</category>
+        <category>Windows</category>
+        <category>安装教程</category>
+        <category>hexo</category>
+        <category>Shoka</category>
+        <category>ShokaX</category>
+        <category>mysql</category>
+        <category>java</category>
+        <category>定位</category>
+        <category>struts2</category>
+        <category>JVM</category>
+        <category>源码</category>
+        <category>websocket</category>
+        <category>依赖升级</category>
+        <category>安全漏洞</category>
+        <category>性能优化</category>
+        <category>垃圾回收</category>
+        <category>工具</category>
+        <category>github</category>
+        <category>日常</category>
+        <category>动漫</category>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/05/20/%E5%AE%9A%E4%BD%8D-%E5%BA%94%E7%94%A8%E9%A2%91%E7%B9%81FGC/</guid>
+            <title>定位和解决应用频繁Full GC问题</title>
+            <link>http://example.com/2023/05/20/%E5%AE%9A%E4%BD%8D-%E5%BA%94%E7%94%A8%E9%A2%91%E7%B9%81FGC/</link>
+            <category>java</category>
+            <category>定位</category>
+            <category>JVM</category>
+            <category>性能优化</category>
+            <category>垃圾回收</category>
+            <pubDate>Sat, 20 May 2023 13:17:01 +0000</pubDate>
+            <description><![CDATA[ &lt;h2 id=&#34;背景&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#背景&#34;&gt;#&lt;/a&gt; 背景&lt;/h2&gt;
+&lt;p&gt;在话务量环境中，我们发现接口响应变慢。由于该环境中运行着多种业务，难以直接判断是哪个业务引发了这个问题。因此，我们需要进行深入的性能分析和问题定位。&lt;/p&gt;
+&lt;h2 id=&#34;问题定位过程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#问题定位过程&#34;&gt;#&lt;/a&gt; 问题定位过程&lt;/h2&gt;
+&lt;h3 id=&#34;1-使用jstat观察垃圾收集情况&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#1-使用jstat观察垃圾收集情况&#34;&gt;#&lt;/a&gt; 1. 使用 jstat 观察垃圾收集情况&lt;/h3&gt;
+&lt;p&gt;首先，我们使用 &lt;code&gt;jstat -gcutil&lt;/code&gt;  命令查看垃圾收集的情况。观察结果显示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;老年代使用率较高&lt;/li&gt;
+&lt;li&gt;GC 次数和时间明显偏多&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些迹象表明系统可能正在频繁进行 Full GC。&lt;/p&gt;
+&lt;h3 id=&#34;2-使用jmap分析堆内存&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2-使用jmap分析堆内存&#34;&gt;#&lt;/a&gt; 2. 使用 jmap 分析堆内存&lt;/h3&gt;
+&lt;p&gt;接下来，我们使用 &lt;code&gt;jmap -heap &amp;lt;pid&amp;gt;&lt;/code&gt;  命令查看堆内存使用情况，发现内存使用量确实很高。&lt;/p&gt;
+&lt;p&gt;为了进一步分析，我们执行了以下步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;手动触发一次 Full GC： &lt;code&gt;jmap -histo:live &amp;lt;pid&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;再次执行 &lt;code&gt;jmap -heap &amp;lt;pid&amp;gt;&lt;/code&gt;  查看堆内存情况&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;执行完后，再执行 &lt;code&gt;jmap -heap &amp;lt;pid&amp;gt;&lt;/code&gt; ，没有发现明显变化。&lt;/p&gt;
+&lt;p&gt;这时我们推测，JVM 中可能没有多少可回收的垃圾，问题可能出在某个业务模块使用了大量缓存（如 Map 等数据结构）。不过，这个结论还不够确定，因为 &lt;code&gt;jmap -histo:live&lt;/code&gt;  的结果可能受到正在执行的线程影响，这一步得出的结论还不足以定位出具体是哪一块的问题。&lt;/p&gt;
+&lt;h3 id=&#34;3-分析堆转储文件&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3-分析堆转储文件&#34;&gt;#&lt;/a&gt; 3. 分析堆转储文件&lt;/h3&gt;
+&lt;p&gt;为了获得更详细的信息，我们决定生成堆转储文件进行分析：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;jmap -dump:format=b,file=/home/xxx/sch/my.dump &amp;lt;pid&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们使用 VisualVM 分析 dump 文件（也可以使用 MAT）。分析结果显示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;String&lt;/code&gt;  对象数量异常多&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SimpleMessage&lt;/code&gt;  对象数量异常多&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LinkedBlockingQueue$Node&lt;/code&gt;  对象数量异常多&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过代码审查，我们发现这些对象与线程池的任务队列有关。进一步分析发现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用了无界队列&lt;/li&gt;
+&lt;li&gt;消费速度跟不上生产速度&lt;/li&gt;
+&lt;li&gt;队列中积压了大量任务，从而触发频繁的 Full GC&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们意识到，如果继续这样下去，很可能会导致 OutOfMemoryError。&lt;/p&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#解决方案&#34;&gt;#&lt;/a&gt; 解决方案&lt;/h2&gt;
+&lt;p&gt;问题定位后，我们考虑了以下解决方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;修改队列类型：考虑到原设计可能有其合理性，我们暂时没有采取这个方案。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;优化任务处理逻辑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将原来使用 &lt;code&gt;synchronized&lt;/code&gt;  的地方改为使用 &lt;code&gt;Lock&lt;/code&gt; ，降低锁的粒度。&lt;/li&gt;
+&lt;li&gt;实现批量处理逻辑：当队列中任务数量超过阈值时，启用批量处理模式，提高处理效率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;实施步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;我们首先在话务量环境中部署了第一个优化方案（使用 &lt;code&gt;Lock&lt;/code&gt;  替换 &lt;code&gt;synchronized&lt;/code&gt; ）。&lt;/li&gt;
+&lt;li&gt;验证没有问题后，这解决了紧急情况。&lt;/li&gt;
+&lt;li&gt;随后，我们又实现并部署了批量处理的优化，进一步提升了系统性能。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;总结&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#总结&#34;&gt;#&lt;/a&gt; 总结&lt;/h2&gt;
+&lt;p&gt;这次问题的解决过程展示了系统性能优化的一般步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;发现问题：监控系统性能指标。&lt;/li&gt;
+&lt;li&gt;初步分析：使用 JVM 工具如 &lt;code&gt;jstat&lt;/code&gt;  和 &lt;code&gt;jmap&lt;/code&gt;  快速定位可能的问题区域。&lt;/li&gt;
+&lt;li&gt;深入分析：生成并分析堆转储文件，结合代码审查找出根本原因。&lt;/li&gt;
+&lt;li&gt;制定方案：根据分析结果设计优化方案。&lt;/li&gt;
+&lt;li&gt;逐步实施：先解决紧急问题，然后进行进一步的优化。&lt;/li&gt;
+&lt;li&gt;持续监控：部署优化方案后继续监控系统，确保问题得到解决。&lt;/li&gt;
+&lt;/ol&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

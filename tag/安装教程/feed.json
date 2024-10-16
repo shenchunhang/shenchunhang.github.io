@@ -1,0 +1,21 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "null • All posts by \"安装教程\" tag",
+    "description": "",
+    "home_page_url": "http://example.com",
+    "items": [
+        {
+            "id": "http://example.com/2023/08/15/docker-install-mysql-redis-rebabitMQ/",
+            "url": "http://example.com/2023/08/15/docker-install-mysql-redis-rebabitMQ/",
+            "title": "docker-install-mysql-redis-rebabitMQ",
+            "date_published": "2023-08-15T01:48:39.000Z",
+            "content_html": "<h2 id=\"前言\"><a class=\"markdownIt-Anchor\" href=\"#前言\">#</a> 前言</h2>\n<p>本文将指导您如何在 Windows 系统上安装 Docker, 并使用 Docker 来运行 Redis 容器。这种方法比直接在 Windows 上安装 Redis 更加简单和灵活。</p>\n<h2 id=\"安装docker-desktop-for-windows\"><a class=\"markdownIt-Anchor\" href=\"#安装docker-desktop-for-windows\">#</a> 安装 Docker Desktop for Windows</h2>\n<ol>\n<li>\n<p>系统要求:</p>\n<ul>\n<li>Windows 10 64 位: Pro, Enterprise 或 Education (Build 16299 或更高版本)</li>\n<li>启用 Hyper-V 和容器功能</li>\n</ul>\n</li>\n<li>\n<p>下载 Docker Desktop:</p>\n<ul>\n<li>访问 <a href=\"https://www.docker.com/products/docker-desktop\">Docker 官网</a></li>\n<li>点击 &quot;Download for Windows&quot; 下载安装程序</li>\n</ul>\n</li>\n<li>\n<p>安装步骤:</p>\n<ul>\n<li>双击下载的安装文件</li>\n<li>按照安装向导的提示进行安装</li>\n<li>安装完成后，重启电脑</li>\n</ul>\n</li>\n<li>\n<p>验证安装:</p>\n<ul>\n<li>打开命令提示符或 PowerShell</li>\n<li>运行  <code>docker --version</code>  检查 Docker 是否正确安装</li>\n</ul>\n</li>\n</ol>\n<h2 id=\"使用docker运行redis\"><a class=\"markdownIt-Anchor\" href=\"#使用docker运行redis\">#</a> 使用 Docker 运行 Redis</h2>\n<ol>\n<li>\n<p>拉取 Redis 镜像:</p>\n<pre><code>docker pull redis\n</code></pre>\n</li>\n<li>\n<p>运行 Redis 容器:</p>\n<pre><code>docker run --name my-redis -p 6379:6379 -d redis\n</code></pre>\n<p>这条命令会创建一个名为 &quot;my-redis&quot; 的容器，并将容器的 6379 端口映射到主机的 6379 端口。</p>\n</li>\n<li>\n<p>验证 Redis 是否运行:</p>\n<pre><code>docker ps\n</code></pre>\n<p>你应该能看到一个名为 &quot;my-redis&quot; 的容器正在运行。</p>\n</li>\n<li>\n<p>连接到 Redis:</p>\n<ul>\n<li>使用 Redis 命令行客户端:<pre><code>docker exec -it my-redis redis-cli\n</code></pre>\n</li>\n<li>或者使用其他 Redis 客户端工具，连接到 localhost:6379</li>\n</ul>\n</li>\n</ol>\n<h2 id=\"管理redis容器\"><a class=\"markdownIt-Anchor\" href=\"#管理redis容器\">#</a> 管理 Redis 容器</h2>\n<ul>\n<li>停止容器:  <code>docker stop my-redis</code></li>\n<li>启动容器:  <code>docker start my-redis</code></li>\n<li>重启容器:  <code>docker restart my-redis</code></li>\n<li>删除容器:  <code>docker rm my-redis</code>  (需要先停止容器)</li>\n</ul>\n<h2 id=\"配置redis持久化\"><a class=\"markdownIt-Anchor\" href=\"#配置redis持久化\">#</a> 配置 Redis 持久化</h2>\n<p>如果你需要 Redis 数据持久化，可以使用以下命令创建容器:</p>\n<pre><code>docker run --name my-redis -p 6379:6379 -v /path/to/local/data:/data -d redis redis-server --appendonly yes\n</code></pre>\n<p>这会将 Redis 数据保存在指定的本地目录中。</p>\n<h2 id=\"结语\"><a class=\"markdownIt-Anchor\" href=\"#结语\">#</a> 结语</h2>\n<p>通过 Docker 运行 Redis, 我们可以轻松地在 Windows 上使用这个强大的内存数据库，而无需担心复杂的安装和配置过程。希望这个指南能帮助你顺利地在 Windows 上设置 Docker 和 Redis 环境。</p>\n",
+            "tags": [
+                "Docker",
+                "Redis",
+                "Windows",
+                "安装教程"
+            ]
+        }
+    ]
+}
